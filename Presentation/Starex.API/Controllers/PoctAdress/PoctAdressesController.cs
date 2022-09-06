@@ -23,10 +23,10 @@ namespace Starex.API.Controllers
             return StatusCode(201);
         }
         
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll()
-        {
-            return Ok(await _poctAdressService.GetAll(false));
-        }
+        //[HttpGet("GetAll")]
+        //public async Task<IActionResult> GetAll()
+        //{
+        //    return Ok(await _poctAdressService.GetAll(false));
+        //}
     }
 }

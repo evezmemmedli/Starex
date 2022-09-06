@@ -23,6 +23,10 @@ namespace Starex.Persistence.ServiceRegistration
             services.AddScoped<IPoctAdressService, PoctAdressService>();
             services.AddScoped<IDeliveryPointService, DeliveryPointService>();
             services.AddScoped<INewsService, NewsService>();
+            services.AddScoped<IAboutService, AboutService>();
+            services.AddScoped<IAdvantageService, AdvantageService>();
+            services.AddScoped<IServiceService, ServiceService>();
+            services.AddScoped<ISettingService, SettingService>();
 
 
         }

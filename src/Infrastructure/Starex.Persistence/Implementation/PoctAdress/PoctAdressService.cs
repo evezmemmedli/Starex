@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 
 public class PoctAdressService : IPoctAdressService
@@ -14,21 +15,19 @@ public class PoctAdressService : IPoctAdressService
         PoctAdress poctAdress = new PoctAdress();
 
         poctAdress.Adress = "hvj";
-        poctAdress.DeliveryPointId = dto.DeliveryPointId;
+       
 
      await _unitOfWork.PoctAdressWriteRepository.AddAsync(poctAdress);
      await   _unitOfWork.PoctAdressWriteRepository.CommitAsync();
 
     }
 
-    public async Task<List<PoctAdressPostDto>> GetAll(bool tacking)
+    public async  Task<PoctAdressListDto> GetAll()
     {
-       var query =  _unitOfWork.PoctAdressReadRepository.GetAll(tacking);
+        //var query =   _unitOfWork.PoctAdressReadRepository.GetAll(false,"DeliveryPoint");
+        PoctAdressListDto poctAdressListDto = new PoctAdressListDto();
+        //poctAdressListDto.PoctAdressDtos = query.Select(x => new PoctAdressDto { Adress=x.Adress,DeliveryPoints });
 
-        List<PoctAdressPostDto> dto=new List<PoctAdressPostDto>();
-        dto = query.Select(x => new PoctAdressPostDto { DeliveryPointId = x.DeliveryPointId, Adress = x.Adress }).ToList();
-
-        return dto;
+        return poctAdressListDto;
     }
-      
 }
