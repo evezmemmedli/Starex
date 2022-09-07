@@ -1,6 +1,6 @@
 ﻿
-    public interface ISettingService
-    {
+public interface ISettingService
+{
     public Task AddAsync(SettingPostDto dto);
     public Task<SettingListDto> GetAll();
     public Task<SettingDto> GetByIdAsync(bool tracking, int id);

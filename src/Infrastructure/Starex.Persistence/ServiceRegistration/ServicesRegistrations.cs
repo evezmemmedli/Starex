@@ -27,6 +27,10 @@ namespace Starex.Persistence.ServiceRegistration
             services.AddScoped<IAdvantageService, AdvantageService>();
             services.AddScoped<IServiceService, ServiceService>();
             services.AddScoped<ISettingService, SettingService>();
+            services.AddScoped<IFaqService, FaqService>();
+            services.AddScoped<IFaqQuestionService, FaqQuestionService>();
+           
+            
 
 
         }
