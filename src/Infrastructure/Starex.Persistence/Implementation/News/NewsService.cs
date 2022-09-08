@@ -23,7 +23,7 @@ public class NewsService : INewsService
         if (!dto.Image.IsImageOkay(2)) return null;
         news.Image = await dto.Image.FileCreate(_env.WebRootPath, "images");
         await _unitOfWork.NewsWriteRepository.AddAsync(news);
-        await _unitOfWork.DeliveryPointWriteRepository.CommitAsync();
+        await _unitOfWork.NewsWriteRepository.CommitAsync();
         NewsDto newsDto = _mapper.Map<NewsDto>(news);
         return newsDto;
     }

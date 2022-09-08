@@ -18,6 +18,7 @@ namespace Starex.Persistence.Configurations
             builder.Property(p => p.Title).IsRequired().HasMaxLength(200);
             builder.Property(p => p.Desc).IsRequired().HasMaxLength(5000);
             builder.Property(p => p.Cashback).HasColumnType("decimal(6,2)").IsRequired();
+            builder.Property(p => p.Image).IsRequired();
         }
     }
 }

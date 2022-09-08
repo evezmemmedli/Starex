@@ -16,7 +16,6 @@ namespace Starex.Persistence.Configurations
             builder.Property(p => p.Name).IsRequired().HasMaxLength(30);
             builder.HasIndex(p => p.Name).IsUnique();
             builder.HasIndex(p => p.Flag).IsUnique();
-            builder.Property(p => p.Flag).IsRequired();
         }
     }
 }

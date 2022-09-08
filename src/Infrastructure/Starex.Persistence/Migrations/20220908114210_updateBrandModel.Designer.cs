@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Starex.Persistence.Context;
 
@@ -11,9 +12,10 @@ using Starex.Persistence.Context;
 namespace Starex.Persistence.Migrations
 {
     [DbContext(typeof(StarexDbContext))]
-    partial class StarexDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220908114210_updateBrandModel")]
+    partial class updateBrandModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,7 +130,6 @@ namespace Starex.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -166,6 +167,7 @@ namespace Starex.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Flag")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
@@ -179,8 +181,7 @@ namespace Starex.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Flag")
-                        .IsUnique()
-                        .HasFilter("[Flag] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("Name")
                         .IsUnique();
