@@ -61,6 +61,7 @@ public class NewsService : INewsService
             throw new ItemNotFoundException("Item not found");
         news.Title = dto.Title;
         news.Desc = dto.Desc;
+        
         if (dto.Image != null)
         {
             FileHelpers.FileDelete(_env.WebRootPath,"images",news.Image);

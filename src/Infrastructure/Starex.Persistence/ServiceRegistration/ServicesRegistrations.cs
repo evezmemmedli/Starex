@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Starex.Application.Repositories;
 using Starex.Persistence.Context;
+using Starex.Persistence.Helpers;
 using Starex.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
@@ -30,10 +31,11 @@ namespace Starex.Persistence.ServiceRegistration
             services.AddScoped<IFaqService, FaqService>();
             services.AddScoped<IFaqQuestionService, FaqQuestionService>();
             services.AddScoped<ICountryService, CountryService>();
-           
-            
+            services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IAboutSkillService, AboutSkillService>();
+            services.AddScoped<ISkillService, SkillService>();
 
-
+            services.AddSingleton<FileUrlGenerate>();
         }
 
     }

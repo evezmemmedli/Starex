@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 using Starex.Domain.Entities.Base;
 using Starex.Persistence.Configurations;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Starex.Persistence.Context
 {
-    public class StarexDbContext : DbContext
+    public class StarexDbContext : IdentityDbContext
     {
         public StarexDbContext(DbContextOptions<StarexDbContext> opt) : base(opt)
         {

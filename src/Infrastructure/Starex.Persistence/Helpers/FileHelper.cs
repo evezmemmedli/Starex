@@ -2,6 +2,7 @@
 
 public static class FileHelpers
 {
+    private const string _fileUrl = ApiRoutes.File.GetFileByName;
     public static async Task<string> FileCreate(this IFormFile file, string root, string folder)
     {
 
@@ -24,7 +25,6 @@ public static class FileHelpers
 
         return filename;
     }
-
     public static void FileDelete(string root, string folder, string image)
     {
         string filePath = Path.Combine(root, folder, image);
@@ -33,7 +33,7 @@ public static class FileHelpers
         {
             File.Delete(filePath);
         }
-    }
+    }   
     public static bool IsImageOkay(this IFormFile file, int mb)
     {
         return file.Length / 1024 / 1024 < mb && file.ContentType.Contains("image/");

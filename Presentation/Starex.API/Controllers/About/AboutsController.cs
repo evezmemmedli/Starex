@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers.About
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AboutsController : ControllerBase
+    
+    public class AboutsController : BaseController
     {
         private readonly IAboutService _aboutService;
 
@@ -13,7 +12,7 @@ namespace Starex.API.Controllers.About
         {
             _aboutService = aboutService;
         }
-        [HttpPost("")]
+        [HttpPost(ApiRoutes.About.Create)]
         public async Task<IActionResult> Create([FromForm] AboutPostDto request)
         {
             await _aboutService.AddAsync(request);

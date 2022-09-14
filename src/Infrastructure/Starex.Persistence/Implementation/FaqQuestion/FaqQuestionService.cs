@@ -31,19 +31,34 @@ public class FaqQuestionService : IFaqQuestionService
         return response;
     }
 
-    public Task<FaqQuestionDto> GetByIdAsync(bool tracking, int id)
+    public async Task<FaqQuestionDto> GetByIdAsync(bool tracking, int id)
     {
-        throw new NotImplementedException();
+        FaqQuestion faqQuestion = _unitOfWork.FaqQuestionReadRepository.Get(tracking, x => x.Id == id).FirstOrDefault();
+        if (faqQuestion == null)
+            throw new ItemNotFoundException("Item not found");
+        FaqQuestionDto dto = _mapper.Map<FaqQuestionDto>(faqQuestion);
+        return dto;
     }
 
     public void Remove(int id)
     {
-        throw new NotImplementedException();
+        FaqQuestion faqQuestion = _unitOfWork.FaqQuestionReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
+        if (faqQuestion == null)
+            throw new ItemNotFoundException("Item not found");
+        _unitOfWork.FaqQuestionWriteRepository.Remove(faqQuestion);
+        _unitOfWork.FaqQuestionWriteRepository.Commit();
     }
 
     public void Update(FaqQuestionPostDto dto, int id)
     {
-        throw new NotImplementedException();
+        FaqQuestion faqQuestion = _unitOfWork.FaqQuestionReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
+        if (faqQuestion == null)
+            throw new ItemNotFoundException("Item not found");
+        faqQuestion.Answer = dto.Answer;
+        faqQuestion.Question = dto.Question;
+        faqQuestion.FaqId = dto.FaqId;
+        _unitOfWork.FaqQuestionWriteRepository.Update(faqQuestion);
+        _unitOfWork.FaqQuestionWriteRepository.Commit();
     }
 }
 

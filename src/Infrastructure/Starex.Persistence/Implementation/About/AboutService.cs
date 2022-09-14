@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
+using Starex.Persistence.Helpers;
 
 public class AboutService : IAboutService
 {
@@ -9,12 +10,14 @@ public class AboutService : IAboutService
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
     readonly IWebHostEnvironment _env;
+    readonly FileUrlGenerate _fileUrlGenerate;
 
-    public AboutService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env)
+    public AboutService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env, FileUrlGenerate fileUrlGenerate)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _env = env;
+        _fileUrlGenerate = fileUrlGenerate;
     }
     public async Task<AboutDto> AddAsync(AboutPostDto dto)
     {
@@ -32,6 +35,9 @@ public class AboutService : IAboutService
         var response = new AboutListDto();
         var data = await _unitOfWork.AboutReadRepository.GetAll(false).ToListAsync();
         var mappedData = _mapper.Map<List<AboutDto>>(data);
+
+        mappedData.ForEach(data => data.PhotoUrl = _fileUrlGenerate.PhotoUrlGenerate(data.Photo));
+
         response.AboutDtos = mappedData;
         return response;
     }
@@ -42,6 +48,7 @@ public class AboutService : IAboutService
         if (about == null)
             throw new ItemNotFoundException("Item not found");
         AboutDto dto = _mapper.Map<AboutDto>(about);
+        dto.PhotoUrl = _fileUrlGenerate.PhotoUrlGenerate(dto.Photo);
         return dto;
     }
 
