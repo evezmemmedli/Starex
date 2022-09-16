@@ -3,7 +3,6 @@
     private const string Root = "api";
     private const string Base = Root;
 
-
     public struct About
     {
         public const string GetAll = Base + "/about";

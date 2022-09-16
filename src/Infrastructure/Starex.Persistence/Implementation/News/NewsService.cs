@@ -2,20 +2,21 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
+using Starex.Persistence.Helpers;
 ////using Microsoft.AspNetCore.Hosting;
 
 public class NewsService : INewsService
 {
-
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
     readonly IWebHostEnvironment _env;
-
-    public NewsService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env)
+    readonly FileUrlGenerate _fileUrlGenerate;
+    public NewsService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env, FileUrlGenerate fileUrlGenerate)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _env = env;
+        _fileUrlGenerate = fileUrlGenerate;
     }
     public async Task<NewsDto> AddAsync(NewsPostDto dto)
     {
@@ -33,6 +34,7 @@ public class NewsService : INewsService
         var response = new NewsListDto();
         var data = await _unitOfWork.NewsReadRepository.GetAll(false).ToListAsync();
         var mappedData = _mapper.Map<List<NewsDto>>(data);
+        mappedData.ForEach(data => data.ImageUrl = _fileUrlGenerate.PhotoUrlGenerate(data.Image));
         response.NewsDtos = mappedData;
         return response;
     }
@@ -42,6 +44,7 @@ public class NewsService : INewsService
         if (news == null)
             throw new ItemNotFoundException("Item not found");
         NewsDto dto = _mapper.Map<NewsDto>(news);
+        dto.ImageUrl = _fileUrlGenerate.PhotoUrlGenerate(dto.Image);
         return dto;
     }
 

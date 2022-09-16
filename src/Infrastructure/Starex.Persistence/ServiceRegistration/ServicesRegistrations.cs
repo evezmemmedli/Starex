@@ -1,13 +1,19 @@
 ﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Starex.Application.Repositories;
 using Starex.Persistence.Context;
 using Starex.Persistence.Helpers;
 using Starex.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Text;
 
 namespace Starex.Persistence.ServiceRegistration
 {
@@ -15,11 +21,46 @@ namespace Starex.Persistence.ServiceRegistration
     {
         public static void AddPersistenceRegistration(this IServiceCollection services, IConfiguration config)
         {
+
             services.AddDbContext<StarexDbContext>(opt =>
             {
                 opt.UseSqlServer(config.GetConnectionString("default"));
             });
-            services.AddValidatorsFromAssemblyContaining<PoctAdressPostDto>();
+            var jwtSetting = new JwtSetting();
+            config.Bind(nameof(jwtSetting), jwtSetting);
+            services.AddSingleton(jwtSetting);
+            services.AddIdentity<AppUser,IdentityRole>(opt =>
+            {
+                opt.User.RequireUniqueEmail = true;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 6;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireUppercase = false;
+                opt.Lockout.AllowedForNewUsers = true;
+            }).AddEntityFrameworkStores<StarexDbContext>();
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(opt =>
+            {
+                opt.SaveToken = true;
+                opt.TokenValidationParameters = new()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSetting.Secret)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    RequireExpirationTime = false,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                }; 
+
+            });
+            services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddScoped<IUnitOfWork,UnitOfWork>();
             services.AddScoped<IPoctAdressService, PoctAdressService>();
             services.AddScoped<IDeliveryPointService, DeliveryPointService>();
@@ -34,8 +75,11 @@ namespace Starex.Persistence.ServiceRegistration
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IAboutSkillService, AboutSkillService>();
             services.AddScoped<ISkillService, SkillService>();
-
+            services.AddScoped<IJwtTokenService, JwtService>();
+            services.AddScoped<IRegisterService, RegisterService>();
+            services.AddScoped<ILoginService, LoginService>();
             services.AddSingleton<FileUrlGenerate>();
+           
         }
 
     }

@@ -3,19 +3,20 @@ using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
+using Starex.Persistence.Helpers;
 
 public class ServiceService : IServiceService
 {
-
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
     readonly IWebHostEnvironment _env;
-
-    public ServiceService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env)
+    readonly FileUrlGenerate _fileUrlGenerate;
+    public ServiceService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env, FileUrlGenerate fileUrlGenerate)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _env = env;
+        _fileUrlGenerate = fileUrlGenerate;
     }
     public async Task<ServiceDto> AddAsync(ServicePostDto dto)
     {
@@ -33,6 +34,7 @@ public class ServiceService : IServiceService
         var response = new ServiceListDto();
         var data = await _unitOfWork.ServiceReadRepository.GetAll(false).ToListAsync();
         var mappedData = _mapper.Map<List<ServiceDto>>(data);
+        mappedData.ForEach(data => data.PhotoUrl = _fileUrlGenerate.PhotoUrlGenerate(data.Photo));
         response.ServiceDtos = mappedData;
         return response;
     }
@@ -43,6 +45,7 @@ public class ServiceService : IServiceService
         if (service == null)
             throw new ItemNotFoundException("Item not found");
         ServiceDto dto = _mapper.Map<ServiceDto>(service);
+        dto.PhotoUrl = _fileUrlGenerate.PhotoUrlGenerate(dto.Photo);
         return dto;
     }
 

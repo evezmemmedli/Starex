@@ -35,9 +35,7 @@ public class AboutService : IAboutService
         var response = new AboutListDto();
         var data = await _unitOfWork.AboutReadRepository.GetAll(false).ToListAsync();
         var mappedData = _mapper.Map<List<AboutDto>>(data);
-
         mappedData.ForEach(data => data.PhotoUrl = _fileUrlGenerate.PhotoUrlGenerate(data.Photo));
-
         response.AboutDtos = mappedData;
         return response;
     }

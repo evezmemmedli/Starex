@@ -30,7 +30,6 @@ public class UnitOfWork : IUnitOfWork
         ISettingWriteRepository _settingWriteRepository;
         ISkillWriteRepository _skillWriteRepository;
 
-        
         private readonly StarexDbContext _context;
         public UnitOfWork(StarexDbContext context)
         {

@@ -3,18 +3,21 @@ using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
+using Starex.Persistence.Helpers;
 
 public class BrandService : IBrandService
 {
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
     readonly IWebHostEnvironment _env;
+    readonly FileUrlGenerate _fileUrlGenerate;
 
-    public BrandService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env)
+    public BrandService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env, FileUrlGenerate fileUrlGenerate)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _env = env;
+        _fileUrlGenerate = fileUrlGenerate;
     }
     public async Task<BrandDto> AddAsync(BrandPostDto dto)
     {
@@ -32,6 +35,7 @@ public class BrandService : IBrandService
         var response = new BrandListDto();
         var data = await _unitOfWork.BrandReadRepository.GetAll(false).ToListAsync();
         var mappedData = _mapper.Map<List<BrandDto>>(data);
+        mappedData.ForEach(data => data.ImageUrl = _fileUrlGenerate.PhotoUrlGenerate(data.Image));
         response.BrandDtos = mappedData;
         return response;
     }
@@ -42,6 +46,7 @@ public class BrandService : IBrandService
         if (brand == null)
             throw new ItemNotFoundException("Item not found");
         BrandDto dto = _mapper.Map<BrandDto>(brand);
+        dto.ImageUrl = _fileUrlGenerate.PhotoUrlGenerate(dto.Image);
         return dto;
     }
 

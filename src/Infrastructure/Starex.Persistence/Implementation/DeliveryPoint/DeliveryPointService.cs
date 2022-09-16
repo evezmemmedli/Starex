@@ -43,10 +43,8 @@ public class DeliveryPointService : IDeliveryPointService
     public async Task<DeliveryPointDto> GetByIdAsync(bool tracking, int id)
     {
         DeliveryPoint deliveryPoint = _unitOfWork.DeliveryPointReadRepository.Get(tracking, x => x.Id == id).FirstOrDefault();
-
         if (deliveryPoint == null)
             throw new ItemNotFoundException("Item not found");
-
         DeliveryPointDto deliveryPointDto = _mapper.Map<DeliveryPointDto>(deliveryPoint);
 
         return deliveryPointDto;
