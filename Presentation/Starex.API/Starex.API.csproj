@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Apis\Client\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

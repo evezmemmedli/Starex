@@ -38,7 +38,7 @@ namespace Starex.Persistence.ServiceRegistration
                 opt.Password.RequireDigit = false;
                 opt.Password.RequireUppercase = false;
                 opt.Lockout.AllowedForNewUsers = true;
-            }).AddEntityFrameworkStores<StarexDbContext>();
+            }).AddEntityFrameworkStores<StarexDbContext>().AddDefaultTokenProviders();
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -78,6 +78,7 @@ namespace Starex.Persistence.ServiceRegistration
             services.AddScoped<IJwtTokenService, JwtService>();
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddSingleton<FileUrlGenerate>();
            
         }

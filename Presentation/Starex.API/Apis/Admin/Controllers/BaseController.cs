@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Starex.API.Controllers
 {
     [ApiController]
-    [Authorize()]
+    //[Authorize("Admin")]
     public class BaseController : ControllerBase
     {
     }

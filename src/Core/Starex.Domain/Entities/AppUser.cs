@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Starex.Domain.Entities;
 
-public class AppUser:IdentityUser
+public class AppUser : IdentityUser
 {
     public string Name { get; set; }
     public string Surname { get; set; }
