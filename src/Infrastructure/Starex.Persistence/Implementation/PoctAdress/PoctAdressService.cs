@@ -1,11 +1,8 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
-
 public class PoctAdressService : IPoctAdressService
 {
     private readonly IUnitOfWork _unitOfWork;
-
     public PoctAdressService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
@@ -15,13 +12,10 @@ public class PoctAdressService : IPoctAdressService
         PoctAdress poctAdress = new PoctAdress();
 
         poctAdress.Adress = "hvj";
-       
 
      await _unitOfWork.PoctAdressWriteRepository.AddAsync(poctAdress);
      await   _unitOfWork.PoctAdressWriteRepository.CommitAsync();
-
     }
-
     public async  Task<PoctAdressListDto> GetAll()
     {
         //var query =   _unitOfWork.PoctAdressReadRepository.GetAll(false,"DeliveryPoint");

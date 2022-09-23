@@ -1,6 +1,4 @@
-﻿
-using FluentValidation;
-
+﻿using FluentValidation;
 public class SkillPostValidation :AbstractValidator<SkillPostDto>
 {
     public SkillPostValidation()

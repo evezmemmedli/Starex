@@ -2,7 +2,6 @@
 {
     private const string Root = "api";
     private const string Base = Root;
-
     public struct About
     {
         public const string GetAll = Base + "/about";
@@ -106,6 +105,16 @@
         public const string Update = Base + "/skill/{skillId}";
         public const string Delete = Base + "/skill/{skillId}";
         public const string Create = Base + "/skill";
+    }
+    public struct Authentication
+    {
+        public const string Register = Base + "/register"; 
+        public const string Login = Base + "/login";
+        public const string ForgetPassword = Base + "/forgetPassword";
+        public const string ResetPassword = Base + "/resetPassword";
+        public const string Verify = Base + "/verify";
+        public const string UpdateInformation = Base + "/updateInformation";
+        
     }
     public struct File
     {

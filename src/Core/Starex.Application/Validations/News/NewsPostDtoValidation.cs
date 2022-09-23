@@ -1,6 +1,4 @@
-﻿
-using FluentValidation;
-
+﻿using FluentValidation;
 public class NewsPostDtoValidation:AbstractValidator<NewsPostDto>
 {
     public NewsPostDtoValidation()

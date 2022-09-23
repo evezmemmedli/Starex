@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers.AboutSkill
 {
-   
-    public class AboutSkillsController : BaseController
+    public class AboutSkillsController : AdminBaseController
     {
         private readonly IAboutSkillService _service;
         public AboutSkillsController(IAboutSkillService service)

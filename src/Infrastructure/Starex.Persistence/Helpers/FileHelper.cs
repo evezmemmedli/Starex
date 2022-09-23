@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-
 public static class FileHelpers
 {
     private const string _fileUrl = ApiRoutes.File.GetFileByName;

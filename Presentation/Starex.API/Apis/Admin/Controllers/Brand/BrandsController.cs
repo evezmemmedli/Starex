@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers.Brand
 {
-    public class BrandsController : BaseController
+    public class BrandsController : AdminBaseController
     {
         private readonly IBrandService _service;
         public BrandsController(IBrandService service)

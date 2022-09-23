@@ -7,8 +7,6 @@ public class DeliveryPointMap : Profile
         CreateMap<DeliveryPointPostDto, DeliveryPoint>();
         CreateMap<DeliveryPoint, DeliveryPointDto>();
         CreateMap<PoctAdress, PoctAdressPostDto>();
-
-        
     }
 }
 

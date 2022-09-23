@@ -3,7 +3,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Starex.API.Controllers
 {
-    public class FileController : BaseController
+    public class FileController : AdminBaseController
     {
         private readonly string _filePath = Directory.GetCurrentDirectory() + "/wwwroot/Images";
         [HttpGet(ApiRoutes.File.GetFileByName)]

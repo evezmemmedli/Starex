@@ -1,13 +1,10 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
-
 public class SettingService : ISettingService
 {
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
-
     public SettingService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
@@ -21,7 +18,6 @@ public class SettingService : ISettingService
         await _unitOfWork.SettingWriteRepository.AddAsync(setting);
         await _unitOfWork.SettingWriteRepository.CommitAsync();
     }
-
     public async Task<SettingListDto> GetAll()
     {
         var response = new SettingListDto();
@@ -33,7 +29,6 @@ public class SettingService : ISettingService
 
         return response;
     }
-
     public async Task<SettingDto> GetByIdAsync(bool tracking, int id)
     {
         Setting setting = _unitOfWork.SettingReadRepository.Get(tracking, x => x.Id == id).FirstOrDefault();
@@ -45,7 +40,6 @@ public class SettingService : ISettingService
 
         return settingDto;
     }
-
     public void Remove(int id)
     {
         Setting setting = _unitOfWork.SettingReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -54,7 +48,6 @@ public class SettingService : ISettingService
         _unitOfWork.SettingWriteRepository.Remove(setting);
         _unitOfWork.SettingWriteRepository.Commit();
     }
-
     public void Update(SettingPostDto dto, int id)
     {
         Setting setting = _unitOfWork.SettingReadRepository.Get(true, x => x.Id == id).FirstOrDefault();

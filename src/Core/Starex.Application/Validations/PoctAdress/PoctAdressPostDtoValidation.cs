@@ -1,6 +1,4 @@
-﻿
-using FluentValidation;
-
+﻿using FluentValidation;
 public class PoctAdressPostDtoValidation:AbstractValidator<PoctAdressPostDto>
 {
     public PoctAdressPostDtoValidation()

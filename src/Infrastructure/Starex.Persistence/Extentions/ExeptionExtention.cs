@@ -1,9 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-
 public static class ExeptionExtention
 {
     public static void UseCustomExceptionHandler(this IApplicationBuilder app)

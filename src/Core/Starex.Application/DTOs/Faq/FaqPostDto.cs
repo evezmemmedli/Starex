@@ -1,5 +1,4 @@
-﻿
-public class FaqPostDto
+﻿public class FaqPostDto
 {
     public string Title { get; set; }
 }

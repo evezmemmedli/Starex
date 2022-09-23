@@ -1,6 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
-
+﻿using Microsoft.AspNetCore.Http;
 public class NewsPostDto
 {
     public IFormFile Image { get; set; }

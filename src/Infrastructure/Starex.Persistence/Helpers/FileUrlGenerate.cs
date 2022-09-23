@@ -4,13 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace Starex.Persistence.Helpers;
-
 public class FileUrlGenerate
 {
     private static string baseUrl;
-
     public FileUrlGenerate(IHttpContextAccessor httpContextAccessor)
     {
         baseUrl =

@@ -6,7 +6,6 @@ public class DeliveryPointService : IDeliveryPointService
 {
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
-
     public DeliveryPointService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
@@ -16,7 +15,6 @@ public class DeliveryPointService : IDeliveryPointService
     {
         if (_unitOfWork.DeliveryPointReadRepository.GetAll(false).Any(x => x.Adress.ToLower() == dto.Adress.ToLower()))
             throw new ItemExistException($"{dto.Adress} alrady exsist");
-
         DeliveryPoint deliveryPoint = _mapper.Map<DeliveryPoint>(dto);
         deliveryPoint.PoctAdresses = new List<PoctAdress>();
         foreach (PoctAdressPostDto pocadress in dto.poctAdressPostDtos)
@@ -32,11 +30,8 @@ public class DeliveryPointService : IDeliveryPointService
     {
         var response = new PoctAdressListDto();
         var data = await _unitOfWork.DeliveryPointReadRepository.GetAll(false).ToListAsync();
-
         var mappedData = _mapper.Map<List<DeliveryPointDto>>(data);
-
         response.DeliveryPoints = mappedData;
-
         return response;
     }
 
@@ -46,7 +41,6 @@ public class DeliveryPointService : IDeliveryPointService
         if (deliveryPoint == null)
             throw new ItemNotFoundException("Item not found");
         DeliveryPointDto deliveryPointDto = _mapper.Map<DeliveryPointDto>(deliveryPoint);
-
         return deliveryPointDto;
     }
 

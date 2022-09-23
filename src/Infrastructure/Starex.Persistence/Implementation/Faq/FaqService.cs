@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
-
 public class FaqService : IFaqService
 {
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
-
     public FaqService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
@@ -20,7 +18,6 @@ public class FaqService : IFaqService
         await _unitOfWork.FaqWriteRepository.AddAsync(faq);
         await _unitOfWork.FaqWriteRepository.CommitAsync();
     }
-
     public async Task<FaqListDto> GetAll()
     {
         var response = new FaqListDto();
@@ -29,7 +26,6 @@ public class FaqService : IFaqService
         response.FaqDtos = mappedData;
         return response;
     }
-
     public async Task<FaqDto> GetByIdAsync(bool tracking, int id)
     {
         FAQ faq = _unitOfWork.FaqReadRepository.Get(tracking, x => x.Id == id).FirstOrDefault();
@@ -38,7 +34,6 @@ public class FaqService : IFaqService
         FaqDto faqDto = _mapper.Map<FaqDto>(faq);
         return faqDto;
     }
-
     public void Remove(int id)
     {
         FAQ faq = _unitOfWork.FaqReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -47,7 +42,6 @@ public class FaqService : IFaqService
         _unitOfWork.FaqWriteRepository.Remove(faq);
         _unitOfWork.FaqWriteRepository.Commit();
     }
-
     public void Update(FaqPostDto dto, int id)
     {
         FAQ faq = _unitOfWork.FaqReadRepository.Get(true, x => x.Id == id).FirstOrDefault();

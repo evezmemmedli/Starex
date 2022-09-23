@@ -1,6 +1,4 @@
-﻿
-using System.Text.Json.Serialization;
-
+﻿using System.Text.Json.Serialization;
 public class AboutSkillDto
 {
     public int Id { get; set; }

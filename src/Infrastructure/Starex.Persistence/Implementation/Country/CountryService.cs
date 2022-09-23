@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
-
 public class CountryService : ICountryService
 {
     readonly IUnitOfWork _unitOfWork;
@@ -25,7 +24,6 @@ public class CountryService : ICountryService
         CountryDto countryDto = _mapper.Map<CountryDto>(country);
         return countryDto;
     }
-
     public async Task<CountryListDto> GetAll()
     {
         var response = new CountryListDto();
@@ -34,7 +32,6 @@ public class CountryService : ICountryService
         response.CountryDtos = mappedData;
         return response;
     }
-
     public async Task<CountryDto> GetByIdAsync(bool tracking, int id)
     {
         Country country = _unitOfWork.CountryReadRepository.Get(tracking, x => x.Id == id,"Brands").FirstOrDefault();
@@ -43,7 +40,6 @@ public class CountryService : ICountryService
         CountryDto countryDto = _mapper.Map<CountryDto>(country);
         return countryDto;
     }
-
     public void Remove(int id)
     {
         Country country = _unitOfWork.CountryReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -52,7 +48,6 @@ public class CountryService : ICountryService
         _unitOfWork.CountryWriteRepository.Remove(country);
         _unitOfWork.CountryWriteRepository.Commit();
     }
-
     public void Update(CountryPostDto dto, int id)
     {
         Country country = _unitOfWork.CountryReadRepository.Get(true, x => x.Id == id).FirstOrDefault();

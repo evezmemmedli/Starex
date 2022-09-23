@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-
 public class AboutSkillListDto
 {
     [JsonPropertyName("aboutSkills")]

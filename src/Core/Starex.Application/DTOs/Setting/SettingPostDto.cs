@@ -1,5 +1,4 @@
-﻿
-public class SettingPostDto
+﻿public class SettingPostDto
 {
     public string Icon { get; set; }
     public string SocialMedia { get; set; }

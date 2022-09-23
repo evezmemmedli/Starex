@@ -1,5 +1,4 @@
-﻿
-public class FaqQuestionDto
+﻿public class FaqQuestionDto
 {
     public int Id { get; set; }
     public int FaqId { get; set; }

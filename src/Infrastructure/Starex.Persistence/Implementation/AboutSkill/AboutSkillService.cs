@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
-
 public class AboutSkillService : IAboutSkillService
 {
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
-
     public AboutSkillService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
@@ -22,7 +20,6 @@ public class AboutSkillService : IAboutSkillService
         AboutSkillDto aboutSkilldto = _mapper.Map<AboutSkillDto>(aboutSkill);
         return aboutSkilldto;
     }
-
     public async Task<AboutSkillListDto> GetAll()
     {
         var response = new AboutSkillListDto();
@@ -31,7 +28,6 @@ public class AboutSkillService : IAboutSkillService
         response.AboutSkillDtos = mappedData;
         return response;
     }
-
     public async Task<AboutSkillGetDto> GetByIdAsync(bool tracking, int id)
     {
         var response = new AboutSkillGetDto();
@@ -39,11 +35,9 @@ public class AboutSkillService : IAboutSkillService
         if (aboutSkill == null)
             throw new ItemNotFoundException("Item not found");
         AboutSkillDto dto = _mapper.Map<AboutSkillDto>(aboutSkill);
-
         response.AboutSkillDto = dto;
         return response;
     }
-
     public void Remove(int id)
     {
         AboutSkill aboutSkill = _unitOfWork.AboutSkillReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -52,7 +46,6 @@ public class AboutSkillService : IAboutSkillService
         _unitOfWork.AboutSkillWriteRepository.Remove(aboutSkill);
         _unitOfWork.AboutSkillWriteRepository.Commit();
     }
-
     public void Update(AboutSkillPostDto dto, int id)
     {
         AboutSkill aboutSkill = _unitOfWork.AboutSkillReadRepository.Get(true, x => x.Id == id).FirstOrDefault();

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-
 public class AdvantagePostDtoValidation:AbstractValidator<AdvantagePostDto>
 {
     public AdvantagePostDtoValidation()

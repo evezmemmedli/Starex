@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-
 public class AboutDto
 {
     public int Id { get; set; }

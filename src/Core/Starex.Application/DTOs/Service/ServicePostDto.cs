@@ -1,6 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
-
+﻿using Microsoft.AspNetCore.Http;
 public class ServicePostDto
 {
     public IFormFile Photo { get; set; }

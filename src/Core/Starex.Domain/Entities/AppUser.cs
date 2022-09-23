@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Starex.Domain.Entities;
-
 public class AppUser : IdentityUser
 {
     public string Name { get; set; }
@@ -14,5 +13,9 @@ public class AppUser : IdentityUser
     public int PoctAdressId { get; set; }
     public string IdentityNumber { get; set; }
     public string Fin { get; set; }
+    //balans elave et
+    public decimal Balans { get; set; }
+    public List<Package> Packages { get; set; }
+    public List<Order> Orders { get; set; }
 }
 

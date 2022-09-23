@@ -1,10 +1,8 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 using Starex.Persistence.Helpers;
-
 public class BrandService : IBrandService
 {
     readonly IUnitOfWork _unitOfWork;
@@ -29,7 +27,6 @@ public class BrandService : IBrandService
         BrandDto brandDto = _mapper.Map<BrandDto>(brand);
         return brandDto;
     }
-
     public async Task<BrandListDto> GetAll()
     {
         var response = new BrandListDto();
@@ -39,7 +36,6 @@ public class BrandService : IBrandService
         response.BrandDtos = mappedData;
         return response;
     }
-
     public async Task<BrandDto> GetByIdAsync(bool tracking, int id)
     {
         Brand brand = _unitOfWork.BrandReadRepository.Get(tracking, x => x.Id == id).FirstOrDefault();
@@ -49,7 +45,6 @@ public class BrandService : IBrandService
         dto.ImageUrl = _fileUrlGenerate.PhotoUrlGenerate(dto.Image);
         return dto;
     }
-
     public void Remove(int id)
     {
         Brand brand = _unitOfWork.BrandReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -58,7 +53,6 @@ public class BrandService : IBrandService
         _unitOfWork.BrandWriteRepository.Remove(brand);
         _unitOfWork.BrandWriteRepository.Commit();
     }
-
     public void Update(BrandPostDto dto, int id)
     {
         Brand brand = _unitOfWork.BrandReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -68,7 +62,6 @@ public class BrandService : IBrandService
         brand.Desc = dto.Desc;
         brand.Cashback = dto.Cashback;
         brand.CountryId = dto.CountryId;    
-        
         if (dto.Image != null)
         {
             FileHelpers.FileDelete(_env.WebRootPath, "images", brand.Image);

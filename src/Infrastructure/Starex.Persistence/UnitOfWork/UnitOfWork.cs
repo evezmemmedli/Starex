@@ -1,6 +1,4 @@
-﻿
-using Starex.Persistence.Context;
-
+﻿using Starex.Persistence.Context;
 public class UnitOfWork : IUnitOfWork
     {
         IAboutReadRepository _aboutReadRepository;
@@ -62,5 +60,4 @@ public class UnitOfWork : IUnitOfWork
         public IServiceWriteRepository ServiceWriteRepository => _serviceWriteRepository ?? new ServiceWriteRepository(_context);
         public ISettingWriteRepository SettingWriteRepository =>_settingWriteRepository ?? new SettingWriteRepository(_context);
         public ISkillWriteRepository SkillWriteRepository => _skillWriteRepository ?? new SkillWriteRepository(_context);
- 
     }

@@ -2,13 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Starex.API.Apis.Client.Controllers;
 using Starex.Application.DTOs.Authentication;
 
 namespace Starex.API.Controllers.Register
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AuthenticationsController : ControllerBase
+    public class AuthenticationsController : ClientBaseController
     {
         private readonly IRegisterService _registerService;
         private readonly ILoginService _loginService;
@@ -19,13 +18,13 @@ namespace Starex.API.Controllers.Register
             _roleManager = roleManager;
             _loginService = loginService;
         }
-        [HttpPost("")]
-        public async Task<IActionResult> Register(RegisterPostDto dto)
+        [HttpPost(ApiRoutes.Authentication.Register)]
+        public async Task<IActionResult> Register([FromBody]RegisterPostDto dto)
         {
             await _registerService.Register(dto);
             return Ok();
         }
-        [HttpGet("")]
+        [HttpGet(ApiRoutes.Authentication.Login)]
         public async Task<IActionResult> Login(string email, string password)
         {
             LoginDto dto = new();
@@ -34,9 +33,8 @@ namespace Starex.API.Controllers.Register
             AuthenticationResultDto authenticationResultDto = await _loginService.Login(dto);
             return Ok(authenticationResultDto.JwtToken);
         }
-
-        [HttpPost("api/updateUserInformation")]
-        public async Task<IActionResult> UpdateUserInformation([FromBody] UpdatePostDto request)
+        [HttpPost(ApiRoutes.Authentication.UpdateInformation)]
+        public async Task<IActionResult> UpdateUserInformation( UpdatePostDto request)
         {
             var response = await _registerService.UpdateUserInformation(request);
 
@@ -58,7 +56,6 @@ namespace Starex.API.Controllers.Register
         //    var roles = roleMngr.Roles.ToList();
         //}
 
-
         //[HttpGet]
         //public async Task<IActionResult> Role()
         //{
@@ -67,21 +64,18 @@ namespace Starex.API.Controllers.Register
         //    await _roleManager.CreateAsync(new IdentityRole("User"));
         //    return Ok();
         //}
-
-        [HttpGet("Email")]
+        [HttpGet(ApiRoutes.Authentication.ForgetPassword)]
         public async Task<IActionResult> ForgetPassword(string email)
         {
           return Ok(await _loginService.ForgetPasswordAsync(email));
         }
-
-        [HttpPost("ResetPassword")]
+        [HttpPost(ApiRoutes.Authentication.ResetPassword)]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto dto)
         {
             await _loginService.ResetPasswordAsync(dto);
             return NoContent();
         }
-
-        [HttpPost("Verify")]
+        [HttpPost(ApiRoutes.Authentication.Verify)]
         public  async Task<IActionResult> VerifyEmail(string email,string token)
         {
             await _registerService.VerifyEmail(email, token);

@@ -2,12 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 using Starex.Domain.Entities.Base;
-using Starex.Persistence.Configurations;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Starex.Persistence.Context
 {
@@ -15,7 +10,6 @@ namespace Starex.Persistence.Context
     {
         public StarexDbContext(DbContextOptions<StarexDbContext> opt) : base(opt)
         {
-
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,7 +17,6 @@ namespace Starex.Persistence.Context
                 .HasForeignKey(x=>x.PoctAdressId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<AppUser>().HasOne(x => x.DeliveryPoint).WithMany(x => x.AppUsers)
                 .HasForeignKey(x=>x.DeliveryPointId).OnDelete(DeleteBehavior.NoAction);
-
             modelBuilder.ApplyConfiguration(new AboutConfiguration());
             modelBuilder.ApplyConfiguration(new SettingConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceConfiguration());
@@ -37,7 +30,6 @@ namespace Starex.Persistence.Context
             modelBuilder.ApplyConfiguration(new AboutSkillConfiguration());
             modelBuilder.ApplyConfiguration(new PoctAdressConfiguration());
             modelBuilder.ApplyConfiguration(new DeliveryPointConfiguration());
-
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<About> Abouts { get; set; }
@@ -53,8 +45,6 @@ namespace Starex.Persistence.Context
         public DbSet<AboutSkill> AboutSkills { get; set; }
         public DbSet<PoctAdress> PoctAdresses { get; set; }
         public DbSet<DeliveryPoint> DeliveryPoints { get; set; }
-        
-
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())

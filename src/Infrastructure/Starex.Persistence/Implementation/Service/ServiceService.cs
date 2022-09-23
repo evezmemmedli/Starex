@@ -1,10 +1,8 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 using Starex.Persistence.Helpers;
-
 public class ServiceService : IServiceService
 {
     readonly IUnitOfWork _unitOfWork;
@@ -28,7 +26,6 @@ public class ServiceService : IServiceService
         ServiceDto ServiceDto = _mapper.Map<ServiceDto>(service);
         return ServiceDto;
     }
-
     public async Task<ServiceListDto> GetAll()
     {
         var response = new ServiceListDto();
@@ -38,7 +35,6 @@ public class ServiceService : IServiceService
         response.ServiceDtos = mappedData;
         return response;
     }
-
     public async Task<ServiceDto> GetByIdAsync(bool tracking, int id)
     {
         Service service = _unitOfWork.ServiceReadRepository.Get(tracking, x => x.Id == id).FirstOrDefault();
@@ -48,7 +44,6 @@ public class ServiceService : IServiceService
         dto.PhotoUrl = _fileUrlGenerate.PhotoUrlGenerate(dto.Photo);
         return dto;
     }
-
     public void Remove(int id)
     {
         Service service = _unitOfWork.ServiceReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -57,7 +52,6 @@ public class ServiceService : IServiceService
         _unitOfWork.ServiceWriteRepository.Remove(service);
         _unitOfWork.ServiceWriteRepository.Commit();
     }
-
     public void Update(ServicePostDto dto, int id)
     {
         Service service = _unitOfWork.ServiceReadRepository.Get(true, x => x.Id == id).FirstOrDefault();

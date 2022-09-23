@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-
 public class AboutPostDtoValidation : AbstractValidator<AboutPostDto>
 {
     public AboutPostDtoValidation()

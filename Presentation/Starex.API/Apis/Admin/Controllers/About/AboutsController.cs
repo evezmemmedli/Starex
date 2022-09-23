@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers.About
 {
-    
-    public class AboutsController : BaseController
+    public class AboutsController : AdminBaseController
     {
         private readonly IAboutService _aboutService;
         public AboutsController(IAboutService aboutService)

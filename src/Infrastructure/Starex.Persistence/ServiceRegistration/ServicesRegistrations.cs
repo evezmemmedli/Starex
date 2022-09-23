@@ -21,7 +21,6 @@ namespace Starex.Persistence.ServiceRegistration
     {
         public static void AddPersistenceRegistration(this IServiceCollection services, IConfiguration config)
         {
-
             services.AddDbContext<StarexDbContext>(opt =>
             {
                 opt.UseSqlServer(config.GetConnectionString("default"));
@@ -80,7 +79,6 @@ namespace Starex.Persistence.ServiceRegistration
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddSingleton<FileUrlGenerate>();
-           
         }
 
     }

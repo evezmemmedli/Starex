@@ -1,7 +1,5 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Starex.Domain.Entities;
-
 public class AboutSkillMap:Profile
 {
     public AboutSkillMap()

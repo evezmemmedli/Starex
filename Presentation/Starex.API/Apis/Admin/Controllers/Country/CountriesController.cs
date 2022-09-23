@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers.Country
 {
-    public class CountriesController : BaseController
+    public class CountriesController : AdminBaseController
     {
         readonly ICountryService _service;
         public CountriesController(ICountryService service)

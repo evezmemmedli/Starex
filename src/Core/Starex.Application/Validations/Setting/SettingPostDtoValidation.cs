@@ -1,6 +1,4 @@
-﻿
-using FluentValidation;
-
+﻿using FluentValidation;
 public class SettingPostDtoValidation:AbstractValidator<SettingPostDto>
 {
     public SettingPostDtoValidation()

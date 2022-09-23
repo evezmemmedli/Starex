@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 using Starex.Persistence.Helpers;
-////using Microsoft.AspNetCore.Hosting;
-
 public class NewsService : INewsService
 {
     readonly IUnitOfWork _unitOfWork;
@@ -28,7 +26,6 @@ public class NewsService : INewsService
         NewsDto newsDto = _mapper.Map<NewsDto>(news);
         return newsDto;
     }
-
     public async Task<NewsListDto> GetAll()
     {
         var response = new NewsListDto();
@@ -47,7 +44,6 @@ public class NewsService : INewsService
         dto.ImageUrl = _fileUrlGenerate.PhotoUrlGenerate(dto.Image);
         return dto;
     }
-
     public void Remove(int id)
     {
         News news = _unitOfWork.NewsReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -56,7 +52,6 @@ public class NewsService : INewsService
         _unitOfWork.NewsWriteRepository.Remove(news);
         _unitOfWork.NewsWriteRepository.Commit();
     }
-
     public void Update(NewsPostDto dto, int id)
     {
         News news = _unitOfWork.NewsReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -72,7 +67,6 @@ public class NewsService : INewsService
         }
         _unitOfWork.NewsWriteRepository.Update(news);
         _unitOfWork.NewsWriteRepository.Commit();
-
     }
 }
 

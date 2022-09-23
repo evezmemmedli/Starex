@@ -1,12 +1,9 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
-
 public class AdvantageService : IAdvantageService
 {
-
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
     readonly IWebHostEnvironment _env;
@@ -27,7 +24,6 @@ public class AdvantageService : IAdvantageService
         AdvantageDto advantageDto = _mapper.Map<AdvantageDto>(advantage);
         return advantageDto;
     }
-
     public async Task<AdvantageListDto> GetAll()
     {
         var response = new AdvantageListDto();
@@ -36,7 +32,6 @@ public class AdvantageService : IAdvantageService
         response.AdvantageDtos = mappedData;
         return response;
     }
-
     public async Task<AdvantageDto> GetByIdAsync(bool tracking, int id)
     {
         Advantage advantage = _unitOfWork.AdvantageReadRepository.Get(tracking, x => x.Id == id).FirstOrDefault();
@@ -45,7 +40,6 @@ public class AdvantageService : IAdvantageService
         AdvantageDto dto = _mapper.Map<AdvantageDto>(advantage);
         return dto;
     }
-
     public void Remove(int id)
     {
         Advantage advantage = _unitOfWork.AdvantageReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -54,7 +48,6 @@ public class AdvantageService : IAdvantageService
         _unitOfWork.AdvantageWriteRepository.Remove(advantage);
         _unitOfWork.AdvantageWriteRepository.Commit();
     }
-
     public void Update(AdvantagePostDto dto, int id)
     {
         Advantage advantage = _unitOfWork.AdvantageReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -69,7 +62,5 @@ public class AdvantageService : IAdvantageService
         _unitOfWork.AdvantageWriteRepository.Update(advantage);
         _unitOfWork.AdvantageWriteRepository.Commit();
     }
-
-
 }
 

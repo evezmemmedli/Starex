@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 using Starex.Persistence.Helpers;
-
 public class AboutService : IAboutService
 {
-
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
     readonly IWebHostEnvironment _env;
@@ -39,7 +37,6 @@ public class AboutService : IAboutService
         response.AboutDtos = mappedData;
         return response;
     }
-
     public async Task<AboutDto> GetByIdAsync(bool tracking, int id)
     {
         About about = _unitOfWork.AboutReadRepository.Get(tracking, x => x.Id == id).FirstOrDefault();
@@ -49,7 +46,6 @@ public class AboutService : IAboutService
         dto.PhotoUrl = _fileUrlGenerate.PhotoUrlGenerate(dto.Photo);
         return dto;
     }
-
     public void Remove(int id)
     {
         About about = _unitOfWork.AboutReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
@@ -58,7 +54,6 @@ public class AboutService : IAboutService
         _unitOfWork.AboutWriteRepository.Remove(about);
         _unitOfWork.AboutWriteRepository.Commit();
     }
-
     public void Update(AboutPostDto dto, int id)
     {
         About about = _unitOfWork.AboutReadRepository.Get(true, x => x.Id == id).FirstOrDefault();

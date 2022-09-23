@@ -1,5 +1,4 @@
-﻿
-public class FaqDto
+﻿public class FaqDto
 {
     public int Id { get; set; }
     public string Title { get; set; }

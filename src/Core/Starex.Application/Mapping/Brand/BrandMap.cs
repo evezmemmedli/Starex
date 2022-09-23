@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Starex.Domain.Entities;
-
 public class BrandMap :Profile
 {
     public BrandMap()

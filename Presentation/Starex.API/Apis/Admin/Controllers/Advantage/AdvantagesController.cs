@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Starex.API.Controllers.Advantage
 {
    
-    public class AdvantagesController : BaseController
+    public class AdvantagesController : AdminBaseController
     {
         private readonly IAdvantageService _advantageService;
         public AdvantagesController(IAdvantageService advantageService)
