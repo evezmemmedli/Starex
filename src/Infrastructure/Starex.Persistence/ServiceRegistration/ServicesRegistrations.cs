@@ -6,15 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Starex.Application.Repositories;
+using Starex.Application.Interfaces.Services.Logging;
 using Starex.Persistence.Context;
 using Starex.Persistence.Helpers;
-using Starex.Persistence.Repositories;
-using System;
-using System.Collections.Generic;
+using Starex.Persistence.Loggings;
 using System.Reflection;
 using System.Text;
-
 namespace Starex.Persistence.ServiceRegistration
 {
     public static class ServicesRegistrations
@@ -28,16 +25,16 @@ namespace Starex.Persistence.ServiceRegistration
             var jwtSetting = new JwtSetting();
             config.Bind(nameof(jwtSetting), jwtSetting);
             services.AddSingleton(jwtSetting);
-            services.AddIdentity<AppUser,IdentityRole>(opt =>
-            {
-                opt.User.RequireUniqueEmail = true;
-                opt.Password.RequireDigit = false;
-                opt.Password.RequiredLength = 6;
-                opt.Password.RequireNonAlphanumeric = false;
-                opt.Password.RequireDigit = false;
-                opt.Password.RequireUppercase = false;
-                opt.Lockout.AllowedForNewUsers = true;
-            }).AddEntityFrameworkStores<StarexDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity<AppUser, IdentityRole>(opt =>
+             {
+                 opt.User.RequireUniqueEmail = true;
+                 opt.Password.RequireDigit = false;
+                 opt.Password.RequiredLength = 6;
+                 opt.Password.RequireNonAlphanumeric = false;
+                 opt.Password.RequireDigit = false;
+                 opt.Password.RequireUppercase = false;
+                 opt.Lockout.AllowedForNewUsers = true;
+             }).AddEntityFrameworkStores<StarexDbContext>().AddDefaultTokenProviders();
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -55,12 +52,11 @@ namespace Starex.Persistence.ServiceRegistration
                     RequireExpirationTime = false,
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
-                }; 
-
+                };
             });
             services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddScoped<IUnitOfWork,UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPoctAdressService, PoctAdressService>();
             services.AddScoped<IDeliveryPointService, DeliveryPointService>();
             services.AddScoped<INewsService, NewsService>();
@@ -78,8 +74,14 @@ namespace Starex.Persistence.ServiceRegistration
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ILogging, Logging>();
+            services.AddScoped<IAppealService, AppealService>();
+            services.AddScoped<ICommitmentService, CommitmentService>();
+            services.AddScoped<IDeclareService, DeclareService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IPackageService, PackageService>();
+            services.AddScoped<IReturnPackageService, ReturnPackageService>();
             services.AddSingleton<FileUrlGenerate>();
         }
-
     }
 }

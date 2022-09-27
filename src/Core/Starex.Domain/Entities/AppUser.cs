@@ -13,9 +13,12 @@ public class AppUser : IdentityUser
     public int PoctAdressId { get; set; }
     public string IdentityNumber { get; set; }
     public string Fin { get; set; }
-    //balans elave et
     public decimal Balans { get; set; }
     public List<Package> Packages { get; set; }
     public List<Order> Orders { get; set; }
+    public List<Commitment> Commitments { get; set; }
+    public List<ReturnPackage> ReturnPackages { get; set; }
+    public List<Declare> Declares { get; set; }
+    public List<Appeal> Appeals { get; set; }
 }
 

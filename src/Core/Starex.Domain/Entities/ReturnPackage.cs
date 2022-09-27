@@ -4,6 +4,8 @@ namespace Starex.Domain.Entities
 {
     public class ReturnPackage:BaseEntity
     {
-        public Order OrderId { get; set; }
+        public int ReturnetOrderId { get; set; }
+        public AppUser AppUser { get; set; }
+        public string AppUserId { get; set; }
     }
 }

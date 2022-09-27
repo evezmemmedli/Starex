@@ -56,7 +56,7 @@ namespace Starex.API.Controllers.Register
         //    var roles = roleMngr.Roles.ToList();
         //}
 
-        //[HttpGet]
+        //[HttpGet("Role")]
         //public async Task<IActionResult> Role()
         //{
         //    await _roleManager.CreateAsync(new IdentityRole("Admin"));

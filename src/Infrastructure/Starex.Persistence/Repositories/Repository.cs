@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Starex.Application.Repositories;
 using Starex.Persistence.Context;
 using Starex.Domain.Entities.Base;
 

@@ -9,7 +9,8 @@ namespace Starex.Domain.Entities
 {
     public class Package : BaseEntity
     {
-        public AppUser UserId { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
         public string TrackingId { get; set; }
         public string Product { get; set; }
         public string DeliveryPrice { get; set; }

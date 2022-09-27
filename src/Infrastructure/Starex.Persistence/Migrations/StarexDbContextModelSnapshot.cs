@@ -22,6 +22,116 @@ namespace Starex.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("About", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Desc")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Photo")
+                        .IsUnique();
+
+                    b.ToTable("Abouts");
+                });
+
+            modelBuilder.Entity("AboutSkill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AboutSkills");
+                });
+
+            modelBuilder.Entity("Advantage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Advantages");
+                });
+
+            modelBuilder.Entity("Appeal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Appeals");
+                });
+
             modelBuilder.Entity("AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -32,6 +142,9 @@ namespace Starex.Persistence.Migrations
 
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Balans")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -116,6 +229,103 @@ namespace Starex.Persistence.Migrations
                     b.HasIndex("PoctAdressId");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Cashback")
+                        .HasColumnType("decimal(6,2)");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Desc")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Brands");
+                });
+
+            modelBuilder.Entity("Declare", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Condition")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("File")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TrackingId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Declares");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -251,7 +461,7 @@ namespace Starex.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Starex.Domain.Entities.About", b =>
+            modelBuilder.Entity("Starex.Domain.Entities.Commitment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,128 +469,26 @@ namespace Starex.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Desc")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("Photo")
-                        .IsRequired()
+                    b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Photo")
-                        .IsUnique();
-
-                    b.ToTable("Abouts");
-                });
-
-            modelBuilder.Entity("Starex.Domain.Entities.AboutSkill", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                    b.Property<string>("Fullname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AboutSkills");
-                });
+                    b.HasIndex("AppUserId");
 
-            modelBuilder.Entity("Starex.Domain.Entities.Advantage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Advantages");
-                });
-
-            modelBuilder.Entity("Starex.Domain.Entities.Brand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<decimal>("Cashback")
-                        .HasColumnType("decimal(6,2)");
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Desc")
-                        .IsRequired()
-                        .HasMaxLength(5000)
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Brands");
+                    b.ToTable("Commitments");
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Country", b =>
@@ -509,6 +617,80 @@ namespace Starex.Persistence.Migrations
                     b.ToTable("FaqQuestions");
                 });
 
+            modelBuilder.Entity("Starex.Domain.Entities.Logging.ActionLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ActionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ControllerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IpAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Method")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActionLogs");
+                });
+
+            modelBuilder.Entity("Starex.Domain.Entities.Logging.ErrorLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ErrorPage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Exception")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExceptionCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IpAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ErrorLogs");
+                });
+
             modelBuilder.Entity("Starex.Domain.Entities.News", b =>
                 {
                     b.Property<int>("Id")
@@ -542,6 +724,102 @@ namespace Starex.Persistence.Migrations
                     b.ToTable("News");
                 });
 
+            modelBuilder.Entity("Starex.Domain.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsInAirport")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsInForeignStock")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsTaken")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("OrderCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OrderLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Payment")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("isInInsideStock")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Starex.Domain.Entities.Package", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeliveryPrice")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Payment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Product")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TrackingId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Weight")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Packages");
+                });
+
             modelBuilder.Entity("Starex.Domain.Entities.PoctAdress", b =>
                 {
                     b.Property<int>("Id")
@@ -572,6 +850,33 @@ namespace Starex.Persistence.Migrations
                     b.HasIndex("DeliveryPointId");
 
                     b.ToTable("PoctAdresses");
+                });
+
+            modelBuilder.Entity("Starex.Domain.Entities.ReturnPackage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReturnetOrderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("ReturnPackages");
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Service", b =>
@@ -674,6 +979,15 @@ namespace Starex.Persistence.Migrations
                     b.ToTable("Skills");
                 });
 
+            modelBuilder.Entity("Appeal", b =>
+                {
+                    b.HasOne("AppUser", "AppUser")
+                        .WithMany("Appeals")
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("AppUser", b =>
                 {
                     b.HasOne("Starex.Domain.Entities.DeliveryPoint", "DeliveryPoint")
@@ -691,6 +1005,26 @@ namespace Starex.Persistence.Migrations
                     b.Navigation("DeliveryPoint");
 
                     b.Navigation("PoctAdress");
+                });
+
+            modelBuilder.Entity("Brand", b =>
+                {
+                    b.HasOne("Starex.Domain.Entities.Country", "Country")
+                        .WithMany("Brands")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("Declare", b =>
+                {
+                    b.HasOne("AppUser", "AppUser")
+                        .WithMany("Declares")
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -744,15 +1078,13 @@ namespace Starex.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Starex.Domain.Entities.Brand", b =>
+            modelBuilder.Entity("Starex.Domain.Entities.Commitment", b =>
                 {
-                    b.HasOne("Starex.Domain.Entities.Country", "Country")
-                        .WithMany("Brands")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("AppUser", "AppUser")
+                        .WithMany("Commitments")
+                        .HasForeignKey("AppUserId");
 
-                    b.Navigation("Country");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.FaqQuestion", b =>
@@ -766,6 +1098,24 @@ namespace Starex.Persistence.Migrations
                     b.Navigation("Faq");
                 });
 
+            modelBuilder.Entity("Starex.Domain.Entities.Order", b =>
+                {
+                    b.HasOne("AppUser", "AppUser")
+                        .WithMany("Orders")
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Starex.Domain.Entities.Package", b =>
+                {
+                    b.HasOne("AppUser", "AppUser")
+                        .WithMany("Packages")
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("Starex.Domain.Entities.PoctAdress", b =>
                 {
                     b.HasOne("Starex.Domain.Entities.DeliveryPoint", "DeliveryPoint")
@@ -777,9 +1127,18 @@ namespace Starex.Persistence.Migrations
                     b.Navigation("DeliveryPoint");
                 });
 
+            modelBuilder.Entity("Starex.Domain.Entities.ReturnPackage", b =>
+                {
+                    b.HasOne("AppUser", "AppUser")
+                        .WithMany("ReturnPackages")
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("Starex.Domain.Entities.Skill", b =>
                 {
-                    b.HasOne("Starex.Domain.Entities.AboutSkill", "AboutSkill")
+                    b.HasOne("AboutSkill", "AboutSkill")
                         .WithMany("Skills")
                         .HasForeignKey("AboutSkillId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -788,9 +1147,24 @@ namespace Starex.Persistence.Migrations
                     b.Navigation("AboutSkill");
                 });
 
-            modelBuilder.Entity("Starex.Domain.Entities.AboutSkill", b =>
+            modelBuilder.Entity("AboutSkill", b =>
                 {
                     b.Navigation("Skills");
+                });
+
+            modelBuilder.Entity("AppUser", b =>
+                {
+                    b.Navigation("Appeals");
+
+                    b.Navigation("Commitments");
+
+                    b.Navigation("Declares");
+
+                    b.Navigation("Orders");
+
+                    b.Navigation("Packages");
+
+                    b.Navigation("ReturnPackages");
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Country", b =>

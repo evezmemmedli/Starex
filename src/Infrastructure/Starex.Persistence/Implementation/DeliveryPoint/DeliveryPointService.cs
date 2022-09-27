@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
-using System.Linq;
 public class DeliveryPointService : IDeliveryPointService
 {
     readonly IUnitOfWork _unitOfWork;

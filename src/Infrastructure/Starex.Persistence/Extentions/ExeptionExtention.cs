@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Starex.Application.Interfaces.Services.Logging;
+
 public static class ExeptionExtention
 {
     public static void UseCustomExceptionHandler(this IApplicationBuilder app)
@@ -10,6 +12,7 @@ public static class ExeptionExtention
         {
             error.Run(async context =>
             {
+                ILogging logging = (ILogging)context.RequestServices.GetService(typeof(ILogging));
                 var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
 
                 int statusCode = 500;
@@ -26,6 +29,7 @@ public static class ExeptionExtention
                         statusCode = 415;
                 }
 
+                await logging.LogError(contextFeature.Error, context);
                 context.Response.StatusCode = statusCode;
 
                 string responseStr = JsonConvert.SerializeObject(new

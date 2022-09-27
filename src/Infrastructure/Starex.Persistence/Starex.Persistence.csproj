@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Starex.Application\Starex.Application.csproj" />
+    <ProjectReference Include="..\..\Core\Starex.Domain\Starex.Domain.csproj" />
   </ItemGroup>
 	<ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />

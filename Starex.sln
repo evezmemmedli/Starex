@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starex.API", "Presentation\Starex.API\Starex.API.csproj", "{075B42A8-AB4A-4777-BA00-8898ECCF7A5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starex.UnitTest", "Starex.UnitTest\Starex.UnitTest.csproj", "{BBBD4C50-B7A4-4360-B529-276EC8C0EC32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{075B42A8-AB4A-4777-BA00-8898ECCF7A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{075B42A8-AB4A-4777-BA00-8898ECCF7A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{075B42A8-AB4A-4777-BA00-8898ECCF7A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBBD4C50-B7A4-4360-B529-276EC8C0EC32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBBD4C50-B7A4-4360-B529-276EC8C0EC32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBBD4C50-B7A4-4360-B529-276EC8C0EC32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBBD4C50-B7A4-4360-B529-276EC8C0EC32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

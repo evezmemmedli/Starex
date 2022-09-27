@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 using Starex.Domain.Entities.Base;
-using System;
+using Starex.Domain.Entities.Logging;
 
 namespace Starex.Persistence.Context
 {
@@ -45,6 +45,14 @@ namespace Starex.Persistence.Context
         public DbSet<AboutSkill> AboutSkills { get; set; }
         public DbSet<PoctAdress> PoctAdresses { get; set; }
         public DbSet<DeliveryPoint> DeliveryPoints { get; set; }
+        public DbSet<ActionLog> ActionLogs { get; set; }
+        public DbSet<ErrorLog> ErrorLogs { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Package> Packages { get; set; }
+        public DbSet<Commitment> Commitments { get; set; }
+        public DbSet<Declare> Declares { get; set; }
+        public DbSet<ReturnPackage> ReturnPackages { get; set; }
+        public DbSet<Appeal> Appeals { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())

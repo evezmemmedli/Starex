@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Starex.Application.Repositories;
 using Starex.Domain.Entities.Base;
 using Starex.Persistence.Context;
 using System;

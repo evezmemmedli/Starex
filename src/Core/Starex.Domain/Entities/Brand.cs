@@ -1,6 +1,5 @@
 ﻿using Starex.Domain.Entities;
 using Starex.Domain.Entities.Base;
-using System;
 public class Brand : BaseEntity
 {
     public string Name { get; set; }

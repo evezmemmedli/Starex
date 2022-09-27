@@ -32,11 +32,10 @@ public static class FileHelpers
         {
             File.Delete(filePath);
         }
-    }   
+    }
     public static bool IsImageOkay(this IFormFile file, int mb)
     {
         return file.Length / 1024 / 1024 < mb && file.ContentType.Contains("image/");
     }
 }
 
-    
