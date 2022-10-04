@@ -1,8 +1,10 @@
-﻿    using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers.AboutSkill
 {
+    [Authorize(Roles = "Admin")]
     public class AboutSkillsController : AdminBaseController
     {
         private readonly IAboutSkillService _service;

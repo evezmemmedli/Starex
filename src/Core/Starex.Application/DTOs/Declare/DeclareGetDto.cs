@@ -1,7 +1,7 @@
 ﻿
 public class DeclareGetDto
 {
-    public string UserId { get; set; }
+    public string AppUserId { get; set; }
     public string Brand { get; set; }
     public string Category { get; set; }
     public string File { get; set; }

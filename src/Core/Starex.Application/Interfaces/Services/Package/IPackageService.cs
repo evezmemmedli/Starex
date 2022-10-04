@@ -2,5 +2,7 @@
 {
 
     public Task AddAsync(int id);
+    //public Task GetAll();
+   
 }
 

@@ -4,12 +4,9 @@ public static class FileHelpers
     private const string _fileUrl = ApiRoutes.File.GetFileByName;
     public static async Task<string> FileCreate(this IFormFile file, string root, string folder)
     {
-
         string filename = $"{Guid.NewGuid()}.jpg";
-
         string path = Path.Combine(root, folder);
         string filePath = Path.Combine(path, filename);
-
         try
         {
             using (FileStream stream = new FileStream(filePath, FileMode.Create))
@@ -21,7 +18,6 @@ public static class FileHelpers
         {
             throw new FileLoadException();
         }
-
         return filename;
     }
     public static void FileDelete(string root, string folder, string image)

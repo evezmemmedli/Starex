@@ -20,7 +20,9 @@ public class LoginService : ILoginService
         var result = await _userManager.CheckPasswordAsync(user, dto.Password);
         if (!result) throw new ItemNotFoundException("Password or Username is incorrect");
         if (!user.EmailConfirmed)
-            throw new ItemNotFoundException("Please verify yout email");
+            throw new ItemNotFoundException("Please verify your email");
+        //var roles=await _userManager.GetRolesAsync(user);
+        //if (!roles.Any(x=>x.Contains("Admin"))) throw new ItemNotFoundException("Password or Username is incorrect");
         string token = _jwtService.JwtTokenGenerator(user);
         var authResult = _mapper.Map<AuthenticationResultDto>(user);
         authResult.JwtToken = token;
@@ -30,7 +32,7 @@ public class LoginService : ILoginService
     {
         AppUser user = await _userManager.FindByEmailAsync(email);
         if (user is null)
-            throw new ItemNotFoundException("User not found");
+            throw new ItemNotFoundException("User does not found");
         if (!user.EmailConfirmed)
             throw new ItemNotFoundException("Please verify yout email");
         string token = await _userManager.GeneratePasswordResetTokenAsync(user);

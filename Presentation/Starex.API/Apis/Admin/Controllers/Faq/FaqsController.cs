@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers.Faq
 {
-    public class FaqsController : ControllerBase
+    [Authorize(Roles = "Admin")]
+    public class FaqsController : AdminBaseController
     {
         private readonly IFaqService _service;
         public FaqsController(IFaqService service)

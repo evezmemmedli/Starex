@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers
 {
-    public class DeliveryPointsController : ControllerBase
+    [Authorize(Roles = "Admin")]
+    public class DeliveryPointsController : AdminBaseController
     {
         private readonly IDeliveryPointService _deliveryPointService;
 

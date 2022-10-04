@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers
 {
-    public class NewsController : ControllerBase
+    [Authorize(Roles = "Admin")]
+    public class NewsController : AdminBaseController
     {
         readonly INewsService _newsService;
         public NewsController(INewsService newsService)

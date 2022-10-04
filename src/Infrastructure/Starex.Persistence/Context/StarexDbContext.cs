@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 using Starex.Domain.Entities.Base;
 using Starex.Domain.Entities.Logging;
-
 namespace Starex.Persistence.Context
 {
     public class StarexDbContext : IdentityDbContext<AppUser>
@@ -14,9 +13,11 @@ namespace Starex.Persistence.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AppUser>().HasOne(x => x.PoctAdress).WithMany(x => x.AppUsers)
-                .HasForeignKey(x=>x.PoctAdressId).OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(x => x.PoctAdressId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<AppUser>().HasOne(x => x.DeliveryPoint).WithMany(x => x.AppUsers)
-                .HasForeignKey(x=>x.DeliveryPointId).OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(x => x.DeliveryPointId).OnDelete(DeleteBehavior.NoAction);
+
+
             modelBuilder.ApplyConfiguration(new AboutConfiguration());
             modelBuilder.ApplyConfiguration(new SettingConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceConfiguration());
@@ -69,6 +70,7 @@ namespace Starex.Persistence.Context
             }
             return base.SaveChangesAsync(cancellationToken);
         }
-        
+
+
     }
 }

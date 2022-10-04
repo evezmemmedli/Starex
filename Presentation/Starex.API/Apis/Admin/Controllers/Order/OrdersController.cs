@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Apis.Admin.Controllers.Order
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OrdersController : ControllerBase
+    [Authorize(Roles = "Admin")]
+    public class OrdersController : AdminBaseController
     {
         private readonly IOrderService _orderService;
         public OrdersController(IOrderService orderService)
         {
             _orderService = orderService;
         }
-        [HttpPost]
+        [HttpPost(ApiRoutes.OrderAdmin.Create)]
         public async Task<IActionResult> Create(int id, OrderPostDto postDto)
         {
             await _orderService.Create(id, postDto);
@@ -35,6 +34,17 @@ namespace Starex.API.Apis.Admin.Controllers.Order
         {
             await _orderService.InInsideStock(id);
             return Ok();
+        }
+        [HttpGet(ApiRoutes.OrderAdmin.Get)]
+        public async Task<IActionResult> GetById (int id)
+        {
+            await _orderService.GetById(id);
+            return Ok();
+        }
+        [HttpGet(ApiRoutes.OrderAdmin.GetAll)]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _orderService.GetAll());
         }
     }
 }

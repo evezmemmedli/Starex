@@ -1,3 +1,2 @@
-﻿
-public interface IAppealReadRepository : IRepository<Appeal> { }
+﻿public interface IAppealReadRepository : IReadRepository<Appeal> { }
 

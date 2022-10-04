@@ -3,8 +3,9 @@ public class ResetPasswordDtoValidation : AbstractValidator<ResetPasswordDto>
 {
     public ResetPasswordDtoValidation()
     {
-        RuleFor(x => x.Password).NotEmpty();
-        RuleFor(x => x.ConfirmPassword).NotEmpty();
+        RuleFor(r => r.Email).NotEmpty().WithMessage("Please fill this field");
+        RuleFor(x => x.Password).NotEmpty().WithMessage("Please fill this field");
+        RuleFor(x => x.ConfirmPassword).NotEmpty().WithMessage("Please fill this field");
         RuleFor(x => x).Custom((x, context) =>
         {
             if (x.Password != x.ConfirmPassword)

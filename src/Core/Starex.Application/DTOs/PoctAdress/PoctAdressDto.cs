@@ -5,6 +5,6 @@
 }
 public class DeliveryPointInPoctAdressDto
 {
-    public int DeliveryPointId { get; set; }
+    public int? DeliveryPointId { get; set; }
 }
 

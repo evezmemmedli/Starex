@@ -81,6 +81,7 @@ namespace Starex.Persistence.ServiceRegistration
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IPackageService, PackageService>();
             services.AddScoped<IReturnPackageService, ReturnPackageService>();
+            services.AddScoped<IPaymentService, PaymentService>();
             services.AddSingleton<FileUrlGenerate>();
         }
     }

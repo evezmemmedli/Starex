@@ -1,9 +1,6 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Starex.Domain.Entities;
-
 public class DeclareService : IDeclareService
 {
     readonly IUnitOfWork _unitOfWork;
@@ -24,20 +21,28 @@ public class DeclareService : IDeclareService
         await _unitOfWork.DeclareWriteRepository.CommitAsync();
     }
 
-    public Task Delete(int id)
+    public void Remove(int id)
     {
-        throw new NotImplementedException();
+        Declare declare = _unitOfWork.DeclareReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
+        if (declare == null)
+            throw new ItemNotFoundException("Item not found");
+        _unitOfWork.DeclareWriteRepository.Remove(declare);
+        _unitOfWork.DeclareWriteRepository.Commit();
     }
 
-    public Task<DeclareListDto> GetAll(DeclareListDto listDto)
+    public async Task<DeclareListDto> GetAll()
     {
-        throw new NotImplementedException();
+        var response = new DeclareListDto();
+        var data = await _unitOfWork.DeclareReadRepository.GetAll(false,"AppUser").ToListAsync();
+        var mappedData = _mapper.Map<List<DeclareGetDto>>(data);
+        response.DeclareListDtos = mappedData;
+        return response;
     }
 
     public async Task<DeclareGetDto> GetById(int id)
     {
         Declare declare = await _unitOfWork.DeclareReadRepository.Get(false, x => x.Id == id, "AppUser").FirstOrDefaultAsync();
-        if (declare is null) throw new ItemNotFoundException("Gelmir qaqa");
+        if (declare is null) throw new ItemNotFoundException("Item not Found");
         return _mapper.Map<DeclareGetDto>(declare);
     }
 }

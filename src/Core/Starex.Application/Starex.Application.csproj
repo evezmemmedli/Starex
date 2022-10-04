@@ -20,4 +20,9 @@
     <ProjectReference Include="..\Starex.Domain\Starex.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validations\ReturnPackage\" />
+    <Folder Include="Validations\Package\" />
+  </ItemGroup>
+
 </Project>

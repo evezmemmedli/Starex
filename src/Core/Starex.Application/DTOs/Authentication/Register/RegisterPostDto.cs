@@ -6,7 +6,7 @@ public class RegisterPostDto
     public string Gender { get; set; }
     public DateTime DateOfBirth { get; set; }
     public string Adress { get; set; }
-    public int DeliveryPointId { get; set; }
+    public int? DeliveryPointId { get; set; }
     public int PoctAdressId { get; set; }
     public string IdentityNumber { get; set; }
     public string Fin { get; set; }

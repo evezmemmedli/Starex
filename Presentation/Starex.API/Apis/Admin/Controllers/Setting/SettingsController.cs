@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers.Setting
 {
-    public class SettingsController : ControllerBase
+    [Authorize(Roles = "Admin")]
+    public class SettingsController : AdminBaseController
     {
         private readonly ISettingService _service;
         public SettingsController(ISettingService service)

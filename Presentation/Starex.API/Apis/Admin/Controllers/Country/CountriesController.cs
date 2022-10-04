@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers.Country
 {
+    [Authorize(Roles = "Admin")]
     public class CountriesController : AdminBaseController
     {
         readonly ICountryService _service;

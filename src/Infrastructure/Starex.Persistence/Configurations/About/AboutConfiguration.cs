@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Starex.Domain.Entities;
-
 public class AboutConfiguration : IEntityTypeConfiguration<About>
 {
     public void Configure(EntityTypeBuilder<About> builder)

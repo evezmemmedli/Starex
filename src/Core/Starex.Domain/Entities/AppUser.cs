@@ -8,7 +8,7 @@ public class AppUser : IdentityUser
     public DateTime DateOfBirth { get; set; }
     public string Adress { get; set; }
     public DeliveryPoint DeliveryPoint { get; set; }
-    public int DeliveryPointId { get; set; }
+    public int? DeliveryPointId { get; set; }
     public PoctAdress PoctAdress { get; set; }
     public int PoctAdressId { get; set; }
     public string IdentityNumber { get; set; }

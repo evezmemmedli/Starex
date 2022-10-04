@@ -50,7 +50,7 @@ namespace Starex.Persistence.Migrations
                     b.HasIndex("Photo")
                         .IsUnique();
 
-                    b.ToTable("Abouts");
+                    b.ToTable("Abouts", (string)null);
                 });
 
             modelBuilder.Entity("AboutSkill", b =>
@@ -74,7 +74,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AboutSkills");
+                    b.ToTable("AboutSkills", (string)null);
                 });
 
             modelBuilder.Entity("Advantage", b =>
@@ -102,7 +102,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Advantages");
+                    b.ToTable("Advantages", (string)null);
                 });
 
             modelBuilder.Entity("Appeal", b =>
@@ -129,7 +129,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Appeals");
+                    b.ToTable("Appeals", (string)null);
                 });
 
             modelBuilder.Entity("AppUser", b =>
@@ -153,7 +153,7 @@ namespace Starex.Persistence.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DeliveryPointId")
+                    b.Property<int?>("DeliveryPointId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -277,7 +277,7 @@ namespace Starex.Persistence.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("Declare", b =>
@@ -325,7 +325,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Declares");
+                    b.ToTable("Declares", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -488,7 +488,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Commitments");
+                    b.ToTable("Commitments", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Country", b =>
@@ -522,7 +522,7 @@ namespace Starex.Persistence.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Countries");
+                    b.ToTable("Countries", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.DeliveryPoint", b =>
@@ -553,7 +553,7 @@ namespace Starex.Persistence.Migrations
                     b.HasIndex("Adress")
                         .IsUnique();
 
-                    b.ToTable("DeliveryPoints");
+                    b.ToTable("DeliveryPoints", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.FAQ", b =>
@@ -580,7 +580,7 @@ namespace Starex.Persistence.Migrations
                     b.HasIndex("Title")
                         .IsUnique();
 
-                    b.ToTable("FAQs");
+                    b.ToTable("FAQs", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.FaqQuestion", b =>
@@ -614,7 +614,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasIndex("FaqId");
 
-                    b.ToTable("FaqQuestions");
+                    b.ToTable("FaqQuestions", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Logging.ActionLog", b =>
@@ -651,7 +651,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActionLogs");
+                    b.ToTable("ActionLogs", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Logging.ErrorLog", b =>
@@ -688,7 +688,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ErrorLogs");
+                    b.ToTable("ErrorLogs", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.News", b =>
@@ -721,7 +721,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("News");
+                    b.ToTable("News", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Order", b =>
@@ -775,7 +775,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Package", b =>
@@ -795,17 +795,11 @@ namespace Starex.Persistence.Migrations
                     b.Property<string>("DeliveryPrice")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Payment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Product")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Payment")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
-
-                    b.Property<string>("TrackingId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -817,7 +811,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Packages");
+                    b.ToTable("Packages", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.PoctAdress", b =>
@@ -836,7 +830,7 @@ namespace Starex.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DeliveryPointId")
+                    b.Property<int?>("DeliveryPointId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -849,7 +843,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasIndex("DeliveryPointId");
 
-                    b.ToTable("PoctAdresses");
+                    b.ToTable("PoctAdresses", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.ReturnPackage", b =>
@@ -876,7 +870,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("ReturnPackages");
+                    b.ToTable("ReturnPackages", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Service", b =>
@@ -916,7 +910,7 @@ namespace Starex.Persistence.Migrations
                     b.HasIndex("Title")
                         .IsUnique();
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Setting", b =>
@@ -947,7 +941,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("Starex.Domain.Entities.Skill", b =>
@@ -976,7 +970,7 @@ namespace Starex.Persistence.Migrations
 
                     b.HasIndex("AboutSkillId");
 
-                    b.ToTable("Skills");
+                    b.ToTable("Skills", (string)null);
                 });
 
             modelBuilder.Entity("Appeal", b =>
@@ -993,13 +987,12 @@ namespace Starex.Persistence.Migrations
                     b.HasOne("Starex.Domain.Entities.DeliveryPoint", "DeliveryPoint")
                         .WithMany("AppUsers")
                         .HasForeignKey("DeliveryPointId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Starex.Domain.Entities.PoctAdress", "PoctAdress")
                         .WithMany("AppUsers")
                         .HasForeignKey("PoctAdressId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("DeliveryPoint");
@@ -1121,8 +1114,7 @@ namespace Starex.Persistence.Migrations
                     b.HasOne("Starex.Domain.Entities.DeliveryPoint", "DeliveryPoint")
                         .WithMany("PoctAdresses")
                         .HasForeignKey("DeliveryPointId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("DeliveryPoint");
                 });

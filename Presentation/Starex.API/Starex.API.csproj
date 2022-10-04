@@ -18,8 +18,4 @@
     <ProjectReference Include="..\..\src\Infrastructure\Starex.Persistence\Starex.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
-  </ItemGroup>
-
 </Project>

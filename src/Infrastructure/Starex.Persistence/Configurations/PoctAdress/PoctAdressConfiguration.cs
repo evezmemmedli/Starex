@@ -7,6 +7,7 @@ public class PoctAdressConfiguration : IEntityTypeConfiguration<PoctAdress>
     {
         builder.Property(p => p.Adress).HasMaxLength(100).IsRequired();
         builder.HasIndex(p => p.Adress).IsUnique();
+
     }
 }
 

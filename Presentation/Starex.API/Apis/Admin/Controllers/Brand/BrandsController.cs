@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Controllers.Brand
 {
+    [Authorize(Roles = "Admin")]
     public class BrandsController : AdminBaseController
     {
         private readonly IBrandService _service;
@@ -13,7 +14,6 @@ namespace Starex.API.Controllers.Brand
         }
         [HttpPost(ApiRoutes.Brand.Create)]
 
-        //[Authorize("Admin,SuperaDMIN")]
         public async Task<IActionResult> Create([FromForm] BrandPostDto request)
         {
             await _service.AddAsync(request);

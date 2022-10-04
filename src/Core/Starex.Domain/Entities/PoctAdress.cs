@@ -7,7 +7,7 @@ namespace Starex.Domain.Entities
     {
         public string Adress { get; set; }
         public DeliveryPoint DeliveryPoint { get; set; }
-        public int DeliveryPointId { get; set; }
+        public int? DeliveryPointId { get; set; }
         public List<AppUser> AppUsers { get; set; }
     }
 }

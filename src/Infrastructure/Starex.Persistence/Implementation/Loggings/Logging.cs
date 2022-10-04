@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Starex.Application.Interfaces.Services.Logging;
 using Starex.Domain.Entities.Logging;
-
 namespace Starex.Persistence.Loggings;
 public class Logging : ILogging
 {
     readonly IUnitOfWork _unitOfWork;
-
     public Logging(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
@@ -24,7 +22,6 @@ public class Logging : ILogging
         };
         await _unitOfWork.ActionLogWriteRepository.AddAsync(actionLog);
         await _unitOfWork.ActionLogWriteRepository.CommitAsync();
-        
     }
     public async Task LogError(Exception ex, HttpContext context)
     {
@@ -41,7 +38,6 @@ public class Logging : ILogging
         };
         await _unitOfWork.ErrorLogWriteRepository.AddAsync(error);
         await _unitOfWork.ErrorLogWriteRepository.CommitAsync();
-        
     }
 
     private static string GenerateExceptionCode()

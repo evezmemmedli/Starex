@@ -106,16 +106,78 @@
         public const string Delete = Base + "/skill/{skillId}";
         public const string Create = Base + "/skill";
     }
+    public struct DeclareAdmin
+    {
+        public const string GetAll = Base + "/admin/declare";
+        public const string Get = Base + "/admin/declare/{declareId}";
+        public const string Delete = Base + "/admin/declare/{declarelId}";
+        public const string Create = Base + "/admin/declare";
+    }
+    public struct OrderAdmin
+    {
+        public const string GetAll = Base + "/admin/order/GetAll";
+        public const string Get = Base + "/admin/order/{orderId}";
+        public const string Delete = Base + "/admin/order/{orderlId}";
+        public const string Create = Base + "/admin/order";
+    }
+    public struct OrderUser
+    {
+        public const string GetAll = Base + "/user/order";
+        public const string Get = Base + "/user/order/{orderId}";
+        public const string Delete = Base + "/user/order/{orderlId}";
+        public const string Create = Base + "/user/order";
+    }
+    public struct DeclareUser
+    {
+        public const string GetAll = Base + "/user/declare";
+        public const string Get = Base + "/user/declare/{declareId}";
+        public const string Delete = Base + "/user/declare/{declarelId}";
+        public const string Create = Base + "/user/declare";
+    }
+    public struct CommitmentAdmin
+    {
+        public const string GetAll = Base + "/admin/GetAll";
+        public const string Delete = Base + "/admin/commitment/{commitmentId}";
+        public const string Create = Base + "/admin/commitment";
+    }
+    public struct CommitmentUser
+    {
+        public const string GetAll = Base + "/user/GetAll";
+        public const string Delete = Base + "/user/commitment/{commitmentId}";
+        public const string Create = Base + "/user/commitment";
+    }
+    public struct AppealAdmin
+    {
+        public const string GetAll = Base + "/admin/appealGetAll";
+    }
+    public struct AppealUser
+    {
+        public const string Create = Base + "/user/appeal";
+        public const string GetAll = Base + "/user/appealGetAll";
+
+    }
+
     public struct Authentication
     {
-        public const string Register = Base + "/register"; 
+        public const string Register = Base + "/admin/register"; 
+        public const string Login = Base + "/admin/login";
+        public const string ForgetPassword = Base + "/admin/forgetPassword";
+        public const string ResetPassword = Base + "/admin/resetPassword";
+        public const string Verify = Base + "/admin/verify";
+        public const string UpdateInformation = Base + "/admin/updateInformation";
+        
+    }
+    public struct AuthenticationClient
+    {
+        public const string Register = Base + "/register";
         public const string Login = Base + "/login";
         public const string ForgetPassword = Base + "/forgetPassword";
         public const string ResetPassword = Base + "/resetPassword";
         public const string Verify = Base + "/verify";
         public const string UpdateInformation = Base + "/updateInformation";
-        
+
     }
+
     public struct File
     {
         public const string GetFileByName = Base + "/getFile/{fileName}";

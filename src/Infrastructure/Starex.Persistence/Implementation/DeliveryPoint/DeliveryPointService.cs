@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 public class DeliveryPointService : IDeliveryPointService
 {
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
-    public DeliveryPointService(IUnitOfWork unitOfWork, IMapper mapper)
+    readonly UserManager<AppUser> _userManager;
+    public DeliveryPointService(IUnitOfWork unitOfWork, IMapper mapper, UserManager<AppUser> appUsers)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _userManager = appUsers;
     }
     public async Task AddAsync(DeliveryPointPostDto dto)
     {
@@ -43,11 +46,21 @@ public class DeliveryPointService : IDeliveryPointService
         return deliveryPointDto;
     }
 
-    public void Remove(int id)
+    public  async void Remove(int id)
     {
         DeliveryPoint deliveryPoint = _unitOfWork.DeliveryPointReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
         if (deliveryPoint == null)
             throw new ItemNotFoundException("Item not found");
+
+        List<AppUser> appUsers =  _userManager.Users.Where(x=>x.DeliveryPointId==id).ToList();
+
+        appUsers.ForEach(x => x.DeliveryPointId = null);
+        appUsers.ForEach(async x =>await _userManager.UpdateAsync(x));
+        List<PoctAdress> poctAdresses = _unitOfWork.PoctAdressReadRepository.GetAll(true,x=>x.DeliveryPointId==id).ToList();
+
+        poctAdresses.ForEach(x => x.DeliveryPointId=null);
+        _unitOfWork.PoctAdressWriteRepository.Commit();
+
         _unitOfWork.DeliveryPointWriteRepository.Remove(deliveryPoint);
         _unitOfWork.DeliveryPointWriteRepository.Commit();
     }
@@ -58,19 +71,11 @@ public class DeliveryPointService : IDeliveryPointService
         if (deliveryPoint == null)
             throw new ItemNotFoundException("Item not found");
         if (_unitOfWork.DeliveryPointReadRepository.GetAll(false).Any(x => x.Id != id && x.Adress == dto.Adress))
-            throw new ItemExistException("Qaqa bunu servisde yazmisan");
+            throw new ItemExistException("Item already exist");
         //deliveryPoint = _mapper.Map<DeliveryPoint>(dto);
         deliveryPoint.Adress = dto.Adress;
         deliveryPoint.ActiveHour = dto.ActiveHour;
-        try
-        {
-            _unitOfWork.DeliveryPointWriteRepository.Update(deliveryPoint);
-        }
-        catch (Exception)
-        {
-
-            throw;
-        }
+        _unitOfWork.DeliveryPointWriteRepository.Update(deliveryPoint);
         _unitOfWork.DeliveryPointWriteRepository.Commit();
         DeliveryPointDto deliveryPointDto = _mapper.Map<DeliveryPointDto>(deliveryPoint);
         return deliveryPointDto;

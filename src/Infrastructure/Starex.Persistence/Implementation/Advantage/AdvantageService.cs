@@ -43,8 +43,10 @@ public class AdvantageService : IAdvantageService
     public void Remove(int id)
     {
         Advantage advantage = _unitOfWork.AdvantageReadRepository.Get(true, x => x.Id == id).FirstOrDefault();
+
         if (advantage == null)
             throw new ItemNotFoundException("Item not found");
+
         _unitOfWork.AdvantageWriteRepository.Remove(advantage);
         _unitOfWork.AdvantageWriteRepository.Commit();
     }
