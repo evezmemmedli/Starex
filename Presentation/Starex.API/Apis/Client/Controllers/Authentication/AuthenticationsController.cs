@@ -21,22 +21,22 @@ namespace Starex.API.Controllers.Register
             _paymentService = paymentService;
         }
         [HttpPost(ApiRoutes.AuthenticationClient.Register)]
-        public async Task<IActionResult> Register([FromBody]RegisterPostDto dto)
+        public async Task<IActionResult> Register([FromBody] RegisterPostDto dto)
         {
             await _registerService.Register(dto);
             return Ok();
         }
-        [HttpGet(ApiRoutes.AuthenticationClient.Login)]
-        public async Task<IActionResult> Login(string email, string password)
+        [HttpGet(ApiRoutes.AuthenticationClient.LoginUser)]
+        public async Task<IActionResult> LoginUser(string email, string password)
         {
             LoginDto dto = new();
             dto.Email = email;
             dto.Password = password;
-            AuthenticationResultDto authenticationResultDto = await _loginService.Login(dto);
+            AuthenticationResultDto authenticationResultDto = await _loginService.LoginUser(dto);
             return Ok(authenticationResultDto.JwtToken);
         }
         [HttpPost(ApiRoutes.AuthenticationClient.UpdateInformation)]
-        public async Task<IActionResult> UpdateUserInformation( UpdatePostDto request)
+        public async Task<IActionResult> UpdateUserInformation(UpdatePostDto request)
         {
             var response = await _registerService.UpdateUserInformation(request);
 
@@ -52,7 +52,7 @@ namespace Starex.API.Controllers.Register
         [HttpGet(ApiRoutes.AuthenticationClient.ForgetPassword)]
         public async Task<IActionResult> ForgetPassword(string email)
         {
-          return Ok(await _loginService.ForgetPasswordAsync(email));
+            return Ok(await _loginService.ForgetPasswordAsync(email));
         }
         [HttpPost(ApiRoutes.AuthenticationClient.ResetPassword)]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto dto)
@@ -61,13 +61,13 @@ namespace Starex.API.Controllers.Register
             return NoContent();
         }
         [HttpPost(ApiRoutes.AuthenticationClient.Verify)]
-        public  async Task<IActionResult> VerifyEmail(string email,string token)
+        public async Task<IActionResult> VerifyEmail(string email, string token)
         {
             await _registerService.VerifyEmail(email, token);
             return Ok();
         }
         [HttpPost("payment")]
-        public async Task<IActionResult> Payment(decimal amount,string userid)
+        public async Task<IActionResult> Payment(decimal amount, string userid)
         {
             await _paymentService.IncreaeBalance(amount, userid);
             return Ok();

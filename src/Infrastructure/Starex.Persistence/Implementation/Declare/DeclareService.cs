@@ -16,6 +16,8 @@ public class DeclareService : IDeclareService
     {
         Declare declare = _mapper.Map<Declare>(postDto);
         AppUser appUser = await _userManager.FindByIdAsync(postDto.AppUserId);
+        if (appUser == null)
+            throw new ItemNotFoundException("User not found");
         declare.AppUser = appUser;
         await _unitOfWork.DeclareWriteRepository.AddAsync(declare);
         await _unitOfWork.DeclareWriteRepository.CommitAsync();

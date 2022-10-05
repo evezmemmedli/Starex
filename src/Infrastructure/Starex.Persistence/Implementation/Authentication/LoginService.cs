@@ -21,8 +21,10 @@ public class LoginService : ILoginService
         if (!result) throw new ItemNotFoundException("Password or Username is incorrect");
         if (!user.EmailConfirmed)
             throw new ItemNotFoundException("Please verify your email");
-        //var roles=await _userManager.GetRolesAsync(user);
-        //if (!roles.Any(x=>x.Contains("Admin"))) throw new ItemNotFoundException("Password or Username is incorrect");
+
+
+        var roles = await _userManager.GetRolesAsync(user);
+        if (!roles.Any(x => x.Contains("Admin"))) throw new ItemNotFoundException("Password or Username is incorrect");
         string token = _jwtService.JwtTokenGenerator(user);
         var authResult = _mapper.Map<AuthenticationResultDto>(user);
         authResult.JwtToken = token;
@@ -45,6 +47,24 @@ public class LoginService : ILoginService
         if (user is null)
             throw new ItemNotFoundException("User not found");
         await _userManager.ResetPasswordAsync(user, dto.Token, dto.Password);
+    }
+
+    public async Task<AuthenticationResultDto> LoginUser(LoginDto dto)
+    {
+        AppUser user = await _userManager.FindByEmailAsync(dto.Email);
+        if (user is null) throw new ItemNotFoundException("Password or Username is incorrect");
+        var result = await _userManager.CheckPasswordAsync(user, dto.Password);
+        if (!result) throw new ItemNotFoundException("Password or Username is incorrect");
+        if (!user.EmailConfirmed)
+            throw new ItemNotFoundException("Please verify your email");
+        var roles = await _userManager.GetRolesAsync(user);
+        if (!roles.Any(x => x.Contains("User")))
+            throw new ItemNotFoundException("Password or Username is incorrect");
+
+        string token = _jwtService.JwtTokenGenerator(user);
+        var authResult = _mapper.Map<AuthenticationResultDto>(user);
+        authResult.JwtToken = token;
+        return authResult;
     }
 }
 

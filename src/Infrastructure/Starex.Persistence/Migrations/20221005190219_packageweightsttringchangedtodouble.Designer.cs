@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Starex.Persistence.Context;
 
@@ -11,9 +12,10 @@ using Starex.Persistence.Context;
 namespace Starex.Persistence.Migrations
 {
     [DbContext(typeof(StarexDbContext))]
-    partial class StarexDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221005190219_packageweightsttringchangedtodouble")]
+    partial class packageweightsttringchangedtodouble
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

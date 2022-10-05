@@ -21,11 +21,11 @@ namespace Starex.UnitTest.AdvantageControllerTest
             advantagePostDto = new AdvantagePostDto
             {
                 Title = "gfjh",
-               
+
             };
             advantageDto.Add(new AdvantageDto()
             {
-                
+
                 Icon = "sada",
                 Title = "dasdas"
             });
@@ -43,31 +43,31 @@ namespace Starex.UnitTest.AdvantageControllerTest
             Assert.Equal<int>(1, returnAdvantage.AdvantageDtos.ToList().Count());
         }
         [Fact]
-        public async void PostAdvantage()
+        public async void PostAdvantage_ActionExecutes_ReturnCreatedResultWithAdvantage()
         {
             _mockRepo.Setup(x => x.AddAsync(advantagePostDto));
             var result = await _controller.Create(advantagePostDto);
             var okResult = Assert.IsType<CreatedResult>(result);
         }
         [Fact]
-        public async void DeleteAdvantage()
+        public async void DeleteAdvantage_ActionExecutes_ReturnNoContentResultWithAdvantage()
         {
             _mockRepo.Setup(x => x.Remove(1));
-            var result =  _controller.Delete(1);
-            var okResult = Assert.IsType<OkObjectResult>(result);
+            var result = _controller.Delete(1);
+            var okResult = Assert.IsType<NoContentResult>(result);
         }
         [Fact]
-        public async void GetAdvantage()
+        public async void GetAdvantage_ActionExecutes_ReturnOkObjectResultWithAdvantage()
         {
-            _mockRepo.Setup(x => x.GetByIdAsync(true,1));
+            _mockRepo.Setup(x => x.GetByIdAsync(true, 1));
             var result = await _controller.Get(1);
             var okResult = Assert.IsType<OkObjectResult>(result);
         }
         [Fact]
-        public async void UpdateAdvantage()
+        public async void UpdateAdvantage_ActionExecutes_NoContentResultWithAdvantage()
         {
             _mockRepo.Setup(x => x.Update(advantagePostDto, 1));
-            var result =  _controller.Update(advantagePostDto,1);
+            var result = _controller.Update(advantagePostDto, 1);
             var okResult = Assert.IsType<NoContentResult>(result);
         }
     }

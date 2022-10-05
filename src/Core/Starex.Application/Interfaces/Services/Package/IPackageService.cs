@@ -2,7 +2,8 @@
 {
 
     public Task AddAsync(int id);
-    //public Task GetAll();
-   
+    public Task<PackageListGetDto> GetAll();
+    public Task TakeIt(int id);
+
 }
 

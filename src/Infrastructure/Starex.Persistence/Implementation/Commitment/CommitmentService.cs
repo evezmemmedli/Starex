@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Starex.Domain.Entities;
 
@@ -6,14 +7,19 @@ public class CommitmentService : ICommitmentService
 {
     readonly IUnitOfWork _unitOfWork;
     readonly IMapper _mapper;
-    public CommitmentService(IUnitOfWork unitOfWork, IMapper mapper)
+    readonly UserManager<AppUser> _userManager;
+    public CommitmentService(IUnitOfWork unitOfWork, IMapper mapper, UserManager<AppUser> userManager)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _userManager = userManager;
     }
     public async Task AddAsync(CommitmentPostDto commitmentPostDto)
     {
         Commitment commitment = _mapper.Map<Commitment>(commitmentPostDto);
+        AppUser appUser = await _userManager.FindByIdAsync(commitmentPostDto.AppUserId);
+        if (appUser == null)
+            throw new ItemNotFoundException("User not found");
         await _unitOfWork.CommitmentWriteRepository.AddAsync(commitment);
         await _unitOfWork.CommitmentWriteRepository.CommitAsync();
     }

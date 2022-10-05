@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Validations\Package\**" />
+    <Compile Remove="Validations\ReturnPackage\**" />
+    <EmbeddedResource Remove="Validations\Package\**" />
+    <EmbeddedResource Remove="Validations\ReturnPackage\**" />
+    <None Remove="Validations\Package\**" />
+    <None Remove="Validations\ReturnPackage\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="FluentValidation" Version="11.2.1" />
@@ -18,11 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Starex.Domain\Starex.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Validations\ReturnPackage\" />
-    <Folder Include="Validations\Package\" />
   </ItemGroup>
 
 </Project>

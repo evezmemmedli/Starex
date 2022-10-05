@@ -26,12 +26,14 @@ public static class ExeptionExtention
 
                 await logging.LogError(contextFeature.Error, context);
                 context.Response.StatusCode = statusCode;
+                context.Response.ContentType = "application/json";
                 string responseStr = JsonConvert.SerializeObject(new
                 {
                     code = statusCode,
                     message = msg
                 });
-                await context.Response.WriteAsync(responseStr);
+                await context.Response.HttpContext.Response.WriteAsync(responseStr);
+                //await context.Response.WriteAsync(responseStr);
             });
         });
 

@@ -11,8 +11,7 @@ namespace Starex.Domain.Entities
     {
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
-        public double DeliveryPrice { get; set; }
-        public string Weight { get; set; }
+        public double Weight { get; set; }
         public bool Payment { get; set; }
         public bool Status { get; set; }
     }

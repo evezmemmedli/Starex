@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Starex.API.Apis.Client.Controllers.Commitment
 {
-    
+    [Authorize]
     public class CommitmentsController : ClientBaseController
     {
         readonly ICommitmentService _commitmentService;

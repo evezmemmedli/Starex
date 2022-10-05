@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 namespace Starex.API.Apis.Client.Controllers.Appeal
 {
+    [Authorize]
     public class AppealsController : ClientBaseController
     {
         readonly IAppealService _appealService;

@@ -159,18 +159,18 @@
 
     public struct Authentication
     {
-        public const string Register = Base + "/admin/register"; 
+        public const string Register = Base + "/admin/register";
         public const string Login = Base + "/admin/login";
         public const string ForgetPassword = Base + "/admin/forgetPassword";
         public const string ResetPassword = Base + "/admin/resetPassword";
         public const string Verify = Base + "/admin/verify";
         public const string UpdateInformation = Base + "/admin/updateInformation";
-        
+
     }
     public struct AuthenticationClient
     {
         public const string Register = Base + "/register";
-        public const string Login = Base + "/login";
+        public const string LoginUser = Base + "/admin/loginUser";
         public const string ForgetPassword = Base + "/forgetPassword";
         public const string ResetPassword = Base + "/resetPassword";
         public const string Verify = Base + "/verify";
